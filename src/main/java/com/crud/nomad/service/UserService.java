@@ -1,7 +1,6 @@
 package com.crud.nomad.service;
 
 import com.crud.nomad.domain.User;
-import com.crud.nomad.domain.dto.UserDto;
 import com.crud.nomad.exceptions.UserNotFoundException;
 import com.crud.nomad.respository.UserRepository;
 import lombok.RequiredArgsConstructor;

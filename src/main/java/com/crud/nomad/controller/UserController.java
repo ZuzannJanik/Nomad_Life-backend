@@ -18,8 +18,6 @@ import java.util.List;
 public class UserController {
     private final UserMapper userMapper;
     private final UserService service;
-
-
     @GetMapping
     public ResponseEntity<List<UserDto>> getUsers() {
         List<User> users = service.getAllUsers();

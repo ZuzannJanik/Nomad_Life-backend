@@ -1,5 +1,6 @@
 package com.crud.nomad.controller;
 
+import com.crud.nomad.domain.Trip;
 import com.crud.nomad.domain.User;
 import com.crud.nomad.domain.dto.UserDto;
 import com.crud.nomad.mapper.UserMapper;
@@ -16,6 +17,9 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import com.google.gson.Gson;
+
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -36,7 +40,7 @@ class UserControllerTest {
         @Test
         void shouldFetchAllUsers() throws Exception {
             //Given
-            when(dbService.getAllUsers()).thenReturn(List.of(new User(1L, "1Name", "2Name")));
+            when(dbService.getAllUsers()).thenReturn(List.of(new User(1L, "1Name", "2Name", "Poland", new HashSet<>())));
 
             //When&Then
             mockMvc
@@ -50,7 +54,7 @@ class UserControllerTest {
         @Test
         void shouldFetchUserById() throws Exception {
             //Given
-            User user = new User(1L, "1Name", "2Name");
+            User user = new User(1L, "1Name", "2Name", "Poland", new HashSet<>());
             when(dbService.getUser(1L)).thenReturn(user);
 
             //When&Then
@@ -76,8 +80,8 @@ class UserControllerTest {
         @Test
         void shouldUpdateUser() throws Exception {
             //Given
-            User user = new User(1L, "1Name", "2Name");
-            UserDto userDto = new UserDto(1L, "1Name", "2Name");
+            User user = new User(1L, "1Name", "2Name", "Poland", new HashSet<>());
+            UserDto userDto = new UserDto(1L, "1Name", "2Name", "Poland", new HashSet<>());
             when(dbService.saveUser(any(User.class))).thenReturn(user);
 
             Gson gson = new Gson();
@@ -96,7 +100,7 @@ class UserControllerTest {
         @Test
         void shouldCreateUser() throws Exception {
             //Given
-            UserDto userDto = new UserDto(1L, "1Name", "2Name");
+            UserDto userDto = new UserDto(1L, "1Name", "2Name", "Poland", new HashSet<>());
 
             Gson gson = new Gson();
             String jsonContent = gson.toJson(userDto);
