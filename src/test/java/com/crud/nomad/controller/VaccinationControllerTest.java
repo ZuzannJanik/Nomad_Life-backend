@@ -1,10 +1,11 @@
 package com.crud.nomad.controller;
 
-import com.crud.nomad.domain.Trip;
-import com.crud.nomad.domain.enums.TripStatus;
-import com.crud.nomad.domain.dto.TripDto;
-import com.crud.nomad.mapper.TripMapper;
-import com.crud.nomad.service.TripService;
+import com.crud.nomad.domain.User;
+import com.crud.nomad.domain.Vaccination;
+import com.crud.nomad.domain.dto.VaccinationDto;
+import com.crud.nomad.domain.enums.VacType;
+import com.crud.nomad.mapper.VaccinationMapper;
+import com.crud.nomad.service.VaccinationService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.hamcrest.Matchers;
@@ -18,80 +19,80 @@ import org.springframework.test.context.junit.jupiter.web.SpringJUnitWebConfig;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+
 import java.time.LocalDate;
-import java.util.HashSet;
 import java.util.List;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
-@SpringJUnitWebConfig
-@WebMvcTest(TripController.class)
-public class TripControllerTest {
 
+@SpringJUnitWebConfig
+@WebMvcTest(VaccinationController.class)
+public class VaccinationControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
     @MockBean
-    private TripService dbService;
+    private VaccinationService dbService;
     @SpyBean
-    private TripMapper tripMapper;
+    private VaccinationMapper vaccinationMapper;
 
     @Test
-    void shouldFetchAllTrips() throws Exception {
+    void shouldFetchAllVaccinations() throws Exception {
         //Given
-        when(dbService.getAllTrips()).thenReturn(List.of(new Trip(1L, LocalDate.of(2023,12,12), LocalDate.of(2024,12,12), "Canada", TripStatus.PLANNED, new HashSet<>())));
+        when(dbService.getAllVaccinations()).thenReturn(List.of(new Vaccination(1L, "Disease",  LocalDate.of(2000, 12, 12), VacType.COMPLETED, new User())));
 
         //When&Then
         mockMvc
                 .perform(MockMvcRequestBuilders
-                        .get("/v1/trips")
+                        .get("/v1/vaccinations")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().is(200))
                 .andExpect(MockMvcResultMatchers.jsonPath("$", Matchers.hasSize(1)));
     }
 
     @Test
-    void shouldFetchTripById() throws Exception {
+    void shouldFetchVaccinationById() throws Exception {
         //Given
-        Trip trip = new Trip(1L, LocalDate.of(2023,12,12), LocalDate.of(2024,12,12), "Canada", TripStatus.PLANNED, new HashSet<>());
-        when(dbService.getTrip(1L)).thenReturn(trip);
+        Vaccination vaccination = new Vaccination(1L, "Disease",  LocalDate.of(2000, 12, 12), VacType.COMPLETED, new User());
+        when(dbService.getVaccination(1L)).thenReturn(vaccination);
 
         //When&Then
         mockMvc
                 .perform(MockMvcRequestBuilders
-                        .get("/v1/trips/1")
+                        .get("/v1/vaccinations/1")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().is(200))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.tripId", Matchers.is(1)));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.vacId", Matchers.is(1)));
     }
 
     @Test
-    void shouldDeleteTrip() throws Exception {
+    void shouldDeleteVaccination() throws Exception {
         //Given
         //When & Then
         mockMvc
                 .perform(MockMvcRequestBuilders
-                        .delete("/v1/trips/1")
+                        .delete("/v1/vaccinations/1")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().is(200));
     }
 
     @Test
-    void shouldUpdateTrip() throws Exception {
+    void shouldUpdateVaccination() throws Exception {
         //Given
-        Trip trip = new Trip(1L, LocalDate.of(2023,12,12), LocalDate.of(2024,12,12), "Canada", TripStatus.PLANNED, new HashSet<>());
-        TripDto tripDto = new TripDto();
-        when(dbService.saveTrip(any(Trip.class))).thenReturn(trip);
+        Vaccination vaccination = new Vaccination();
+        VaccinationDto vaccinationDto = new VaccinationDto(1L, "Disease",  LocalDate.of(2000, 12, 12), VacType.COMPLETED, 1L);
+        when(dbService.saveVaccination(any(Vaccination.class))).thenReturn(vaccination);
 
         Gson gson = new GsonBuilder()
                 .registerTypeAdapter(LocalDate.class, new LocalDateTypeAdapter())
                 .create();
-        String jsonContent = gson.toJson(tripDto);
+        String jsonContent = gson.toJson(vaccinationDto);
 
         //When&Then
         mockMvc
                 .perform(MockMvcRequestBuilders
-                        .post("/v1/trips")
+                        .post("/v1/vaccinations")
                         .contentType(MediaType.APPLICATION_JSON)
                         .characterEncoding("UTF-8")
                         .content(jsonContent))
@@ -99,23 +100,24 @@ public class TripControllerTest {
     }
 
     @Test
-    void shouldCreateTrip() throws Exception {
+    void shouldCreateVaccination() throws Exception {
         //Given
-        TripDto tripDto = new TripDto();
+        VaccinationDto vaccinationDto = new VaccinationDto(1L, "Disease",  LocalDate.of(2000, 12, 12), VacType.COMPLETED, 1L);
 
         Gson gson = new GsonBuilder()
                 .registerTypeAdapter(LocalDate.class, new LocalDateTypeAdapter())
                 .create();
 
-        String jsonContent = gson.toJson(tripDto);
+        String jsonContent = gson.toJson(vaccinationDto);
 
         //When&Then
         mockMvc
                 .perform(MockMvcRequestBuilders
-                        .post("/v1/trips")
+                        .post("/v1/vaccinations")
                         .contentType(MediaType.APPLICATION_JSON)
                         .characterEncoding("UTF-8")
                         .content(jsonContent))
                 .andExpect(MockMvcResultMatchers.status().is(200));
     }
 }
+

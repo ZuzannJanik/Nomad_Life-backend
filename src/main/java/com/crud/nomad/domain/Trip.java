@@ -1,7 +1,9 @@
 package com.crud.nomad.domain;
 
+import com.crud.nomad.domain.enums.TripStatus;
+import jakarta.persistence.*;
 import lombok.*;
-import javax.persistence.*;
+
 import java.time.LocalDate;
 import java.util.*;
 
@@ -10,12 +12,13 @@ import java.util.*;
 @Getter
 @Setter
 @Builder
-@Entity(name = "trips")
+@Table(name = "trips")
+@Entity
 public class Trip {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "trip_id", unique = true, nullable = false)
+    @Column(name = "trip_id")
     private Long tripId;
 
     @Column(name = "date_start")
@@ -31,15 +34,17 @@ public class Trip {
     @Enumerated(EnumType.STRING)
     private TripStatus tripStatus;
 
-    @ManyToMany(cascade = {CascadeType.DETACH,CascadeType.MERGE, CascadeType.PERSIST,CascadeType.REFRESH}, fetch = FetchType.LAZY)
+    @ManyToMany
     @JoinTable(
-            name = "trips_users",
-            joinColumns = {@JoinColumn(name = "trip_id", referencedColumnName = "trip_id")},
-            inverseJoinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "user_id")}
+            name = "join_trip_user",
+            joinColumns = {
+                    @JoinColumn(name = "trip_id", referencedColumnName = "trip_id", foreignKey = @ForeignKey(name = "fk_trip_id"))},
+            inverseJoinColumns = {
+                    @JoinColumn(name = "user_id", referencedColumnName = "user_id", foreignKey = @ForeignKey(name = "fk_user_id"))}
     )
-
     @Builder.Default
     private Set<User> userList = new HashSet<>();
+
     public void addUser(User user) {
         this.userList.add(user);
         user.getTripList().add(this);

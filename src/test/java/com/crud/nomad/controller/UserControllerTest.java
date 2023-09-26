@@ -1,7 +1,7 @@
 package com.crud.nomad.controller;
 
-import com.crud.nomad.domain.Trip;
 import com.crud.nomad.domain.User;
+import com.crud.nomad.domain.Vaccination;
 import com.crud.nomad.domain.dto.UserDto;
 import com.crud.nomad.mapper.UserMapper;
 import com.crud.nomad.service.UserService;
@@ -13,14 +13,12 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.web.SpringJUnitWebConfig;
+import com.google.gson.Gson;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import com.google.gson.Gson;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
@@ -30,8 +28,6 @@ class UserControllerTest {
 
         @Autowired
         private MockMvc mockMvc;
-
-
         @MockBean
         private UserService dbService;
         @SpyBean
@@ -40,7 +36,7 @@ class UserControllerTest {
         @Test
         void shouldFetchAllUsers() throws Exception {
             //Given
-            when(dbService.getAllUsers()).thenReturn(List.of(new User(1L, "1Name", "2Name", "Poland", new HashSet<>())));
+            when(dbService.getAllUsers()).thenReturn(List.of(new User(1L, "1Name", "2Name", "Poland", new HashSet<>(), new Vaccination())));
 
             //When&Then
             mockMvc
@@ -54,7 +50,7 @@ class UserControllerTest {
         @Test
         void shouldFetchUserById() throws Exception {
             //Given
-            User user = new User(1L, "1Name", "2Name", "Poland", new HashSet<>());
+            User user = new User(1L, "1Name", "2Name", "Poland", new HashSet<>(), new Vaccination());
             when(dbService.getUser(1L)).thenReturn(user);
 
             //When&Then
@@ -80,8 +76,8 @@ class UserControllerTest {
         @Test
         void shouldUpdateUser() throws Exception {
             //Given
-            User user = new User(1L, "1Name", "2Name", "Poland", new HashSet<>());
-            UserDto userDto = new UserDto(1L, "1Name", "2Name", "Poland", new HashSet<>());
+            User user = new User(1L, "1Name", "2Name", "Poland", new HashSet<>(), new Vaccination());
+            UserDto userDto = new UserDto(1L, "1Name", "2Name", "Poland", new HashSet<>(), new Vaccination());
             when(dbService.saveUser(any(User.class))).thenReturn(user);
 
             Gson gson = new Gson();
@@ -100,7 +96,7 @@ class UserControllerTest {
         @Test
         void shouldCreateUser() throws Exception {
             //Given
-            UserDto userDto = new UserDto(1L, "1Name", "2Name", "Poland", new HashSet<>());
+            UserDto userDto = new UserDto(1L, "1Name", "2Name", "Poland", new HashSet<>(), new Vaccination());
 
             Gson gson = new Gson();
             String jsonContent = gson.toJson(userDto);

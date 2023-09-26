@@ -1,4 +1,4 @@
-package com.crud.nomad.domain;
+package com.crud.nomad.domain.enums;
 
 public enum TripStatus {
     PLANNED,
