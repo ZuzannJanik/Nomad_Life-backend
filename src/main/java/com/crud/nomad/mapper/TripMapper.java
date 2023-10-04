@@ -1,12 +1,10 @@
 package com.crud.nomad.mapper;
 
 import com.crud.nomad.domain.Trip;
-import com.crud.nomad.domain.User;
 import com.crud.nomad.domain.dto.TripDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
