@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/v1/medicines")
+@RequestMapping("/api/v1/medicines")
 @RequiredArgsConstructor
 @CrossOrigin("*")
 public class MedicineController {
@@ -32,7 +32,7 @@ public class MedicineController {
     }
 
     @DeleteMapping(value = "{medicineId}")
-    public ResponseEntity<MedicineDto> deleteMedicine(@PathVariable Long medicineId)  throws  MedicineNotFoundException {
+    public ResponseEntity<MedicineDto> deleteMedicine(@PathVariable Long medicineId)  throws MedicineNotFoundException {
         service.deleteMedicine(medicineId);
         return ResponseEntity.ok().build();
     }

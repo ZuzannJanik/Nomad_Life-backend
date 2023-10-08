@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/v1/vaccinations")
+@RequestMapping("/api/v1/vaccinations")
 @RequiredArgsConstructor
 @CrossOrigin("*")
 public class VaccinationController {

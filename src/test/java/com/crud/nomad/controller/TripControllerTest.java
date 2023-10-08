@@ -44,7 +44,7 @@ public class TripControllerTest {
         //When&Then
         mockMvc
                 .perform(MockMvcRequestBuilders
-                        .get("/v1/trips")
+                        .get("/api/v1/trips")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().is(200))
                 .andExpect(MockMvcResultMatchers.jsonPath("$", Matchers.hasSize(1)));
@@ -59,7 +59,7 @@ public class TripControllerTest {
         //When&Then
         mockMvc
                 .perform(MockMvcRequestBuilders
-                        .get("/v1/trips/1")
+                        .get("/api/v1/trips/1")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().is(200))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.tripId", Matchers.is(1)));
@@ -71,7 +71,7 @@ public class TripControllerTest {
         //When & Then
         mockMvc
                 .perform(MockMvcRequestBuilders
-                        .delete("/v1/trips/1")
+                        .delete("/api/v1/trips/1")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().is(200));
     }
@@ -91,7 +91,7 @@ public class TripControllerTest {
         //When&Then
         mockMvc
                 .perform(MockMvcRequestBuilders
-                        .post("/v1/trips")
+                        .post("/api/v1/trips")
                         .contentType(MediaType.APPLICATION_JSON)
                         .characterEncoding("UTF-8")
                         .content(jsonContent))
@@ -112,7 +112,7 @@ public class TripControllerTest {
         //When&Then
         mockMvc
                 .perform(MockMvcRequestBuilders
-                        .post("/v1/trips")
+                        .post("/api/v1/trips")
                         .contentType(MediaType.APPLICATION_JSON)
                         .characterEncoding("UTF-8")
                         .content(jsonContent))

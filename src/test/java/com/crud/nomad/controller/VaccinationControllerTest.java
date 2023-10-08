@@ -45,7 +45,7 @@ public class VaccinationControllerTest {
         //When&Then
         mockMvc
                 .perform(MockMvcRequestBuilders
-                        .get("/v1/vaccinations")
+                        .get("/api/v1/vaccinations")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().is(200))
                 .andExpect(MockMvcResultMatchers.jsonPath("$", Matchers.hasSize(1)));
@@ -60,7 +60,7 @@ public class VaccinationControllerTest {
         //When&Then
         mockMvc
                 .perform(MockMvcRequestBuilders
-                        .get("/v1/vaccinations/1")
+                        .get("/api/v1/vaccinations/1")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().is(200))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.vacId", Matchers.is(1)));
@@ -72,7 +72,7 @@ public class VaccinationControllerTest {
         //When & Then
         mockMvc
                 .perform(MockMvcRequestBuilders
-                        .delete("/v1/vaccinations/1")
+                        .delete("/api/v1/vaccinations/1")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().is(200));
     }
@@ -92,7 +92,7 @@ public class VaccinationControllerTest {
         //When&Then
         mockMvc
                 .perform(MockMvcRequestBuilders
-                        .post("/v1/vaccinations")
+                        .post("/api/v1/vaccinations")
                         .contentType(MediaType.APPLICATION_JSON)
                         .characterEncoding("UTF-8")
                         .content(jsonContent))
@@ -113,7 +113,7 @@ public class VaccinationControllerTest {
         //When&Then
         mockMvc
                 .perform(MockMvcRequestBuilders
-                        .post("/v1/vaccinations")
+                        .post("/api/v1/vaccinations")
                         .contentType(MediaType.APPLICATION_JSON)
                         .characterEncoding("UTF-8")
                         .content(jsonContent))
