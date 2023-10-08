@@ -2,6 +2,7 @@ package com.crud.nomad.controller;
 
 import com.crud.nomad.domain.User;
 import com.crud.nomad.domain.Vaccination;
+import com.crud.nomad.domain.dto.UserDto;
 import com.crud.nomad.domain.dto.VaccinationDto;
 import com.crud.nomad.domain.enums.VacType;
 import com.crud.nomad.mapper.VaccinationMapper;
@@ -81,7 +82,7 @@ public class VaccinationControllerTest {
     void shouldUpdateVaccination() throws Exception {
         //Given
         Vaccination vaccination = new Vaccination();
-        VaccinationDto vaccinationDto = new VaccinationDto(1L, "Disease",  LocalDate.of(2000, 12, 12), VacType.COMPLETED, 1L);
+        VaccinationDto vaccinationDto = new VaccinationDto(1L, "Disease",  LocalDate.of(2000, 12, 12), VacType.COMPLETED, new UserDto());
         when(dbService.saveVaccination(any(Vaccination.class))).thenReturn(vaccination);
 
         Gson gson = new GsonBuilder()
@@ -102,7 +103,7 @@ public class VaccinationControllerTest {
     @Test
     void shouldCreateVaccination() throws Exception {
         //Given
-        VaccinationDto vaccinationDto = new VaccinationDto(1L, "Disease",  LocalDate.of(2000, 12, 12), VacType.COMPLETED, 1L);
+        VaccinationDto vaccinationDto = new VaccinationDto(1L, "Disease",  LocalDate.of(2000, 12, 12), VacType.COMPLETED, new UserDto());
 
         Gson gson = new GsonBuilder()
                 .registerTypeAdapter(LocalDate.class, new LocalDateTypeAdapter())
