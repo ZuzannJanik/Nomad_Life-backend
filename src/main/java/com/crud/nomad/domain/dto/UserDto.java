@@ -16,5 +16,5 @@ public class UserDto {
     private String surname;
     private String homeland;
     private Set<Trip> tripList;
-    private Vaccination vaccinations;
+    private List<Vaccination> vaccinationList;
 }

@@ -20,7 +20,7 @@ public class UserMapperTest {
     @Test
     void testMapToUser() {
         //Given
-        User user = new User(1L, "1Name", "2Name", "Poland", new HashSet<>(), new Vaccination());
+        User user = new User(1L, "1Name", "2Name", "Poland", new HashSet<>(),new ArrayList<>());
 
         //When
         UserDto userDto = userMapper.mapToUserDto(user);
@@ -35,7 +35,7 @@ public class UserMapperTest {
     @Test
     void mapToUserDto() {
         //Given
-        UserDto userDto = new UserDto(1L, "1Name", "2Name", "Poland", new HashSet<>(), new Vaccination());
+        UserDto userDto = new UserDto(1L, "1Name", "2Name", "Poland", new HashSet<>(), new ArrayList<>());
 
         //When
         User user = userMapper.mapToUser(userDto);
@@ -50,8 +50,8 @@ public class UserMapperTest {
     @Test
     void mapToUserDtoList() {
       //Given
-        User user1 = new User(1L, "1Name", "2Name", "Poland", new HashSet<>(), new Vaccination());
-        User user2 = new User(2L, "3Name", "4Name", "Hong Kong", new HashSet<>(), new Vaccination());
+        User user1 = new User(1L, "1Name", "2Name", "Poland", new HashSet<>(), new ArrayList<>());
+        User user2 = new User(2L, "3Name", "4Name", "Hong Kong", new HashSet<>(), new ArrayList<>());
         List<User> userList = new ArrayList<>();
         userList.add(user1);
         userList.add(user2);
