@@ -2,6 +2,7 @@ package com.crud.nomad.controller;
 
 import com.crud.nomad.domain.User;
 import com.crud.nomad.domain.Vaccination;
+import com.crud.nomad.domain.dto.UserDto;
 import com.crud.nomad.domain.dto.VaccinationDto;
 import com.crud.nomad.domain.enums.VacType;
 import com.crud.nomad.mapper.VaccinationMapper;
@@ -45,7 +46,7 @@ public class VaccinationControllerTest {
         //When&Then
         mockMvc
                 .perform(MockMvcRequestBuilders
-                        .get("/v1/vaccinations")
+                        .get("/api/v1/vaccinations")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().is(200))
                 .andExpect(MockMvcResultMatchers.jsonPath("$", Matchers.hasSize(1)));
@@ -60,7 +61,7 @@ public class VaccinationControllerTest {
         //When&Then
         mockMvc
                 .perform(MockMvcRequestBuilders
-                        .get("/v1/vaccinations/1")
+                        .get("/api/v1/vaccinations/1")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().is(200))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.vacId", Matchers.is(1)));
@@ -72,7 +73,7 @@ public class VaccinationControllerTest {
         //When & Then
         mockMvc
                 .perform(MockMvcRequestBuilders
-                        .delete("/v1/vaccinations/1")
+                        .delete("/api/v1/vaccinations/1")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().is(200));
     }
@@ -81,7 +82,7 @@ public class VaccinationControllerTest {
     void shouldUpdateVaccination() throws Exception {
         //Given
         Vaccination vaccination = new Vaccination();
-        VaccinationDto vaccinationDto = new VaccinationDto(1L, "Disease",  LocalDate.of(2000, 12, 12), VacType.COMPLETED, 1L);
+        VaccinationDto vaccinationDto = new VaccinationDto(1L, "Disease",  LocalDate.of(2000, 12, 12), VacType.COMPLETED, new UserDto());
         when(dbService.saveVaccination(any(Vaccination.class))).thenReturn(vaccination);
 
         Gson gson = new GsonBuilder()
@@ -92,7 +93,7 @@ public class VaccinationControllerTest {
         //When&Then
         mockMvc
                 .perform(MockMvcRequestBuilders
-                        .post("/v1/vaccinations")
+                        .post("/api/v1/vaccinations")
                         .contentType(MediaType.APPLICATION_JSON)
                         .characterEncoding("UTF-8")
                         .content(jsonContent))
@@ -102,7 +103,7 @@ public class VaccinationControllerTest {
     @Test
     void shouldCreateVaccination() throws Exception {
         //Given
-        VaccinationDto vaccinationDto = new VaccinationDto(1L, "Disease",  LocalDate.of(2000, 12, 12), VacType.COMPLETED, 1L);
+        VaccinationDto vaccinationDto = new VaccinationDto(1L, "Disease",  LocalDate.of(2000, 12, 12), VacType.COMPLETED, new UserDto());
 
         Gson gson = new GsonBuilder()
                 .registerTypeAdapter(LocalDate.class, new LocalDateTypeAdapter())
@@ -113,7 +114,7 @@ public class VaccinationControllerTest {
         //When&Then
         mockMvc
                 .perform(MockMvcRequestBuilders
-                        .post("/v1/vaccinations")
+                        .post("/api/v1/vaccinations")
                         .contentType(MediaType.APPLICATION_JSON)
                         .characterEncoding("UTF-8")
                         .content(jsonContent))

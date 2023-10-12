@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/v1/trips")
+@RequestMapping("/api/v1/trips")
 @RequiredArgsConstructor
 @CrossOrigin("*")
 public class TripController {

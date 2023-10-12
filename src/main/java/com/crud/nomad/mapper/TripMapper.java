@@ -1,12 +1,10 @@
 package com.crud.nomad.mapper;
 
 import com.crud.nomad.domain.Trip;
-import com.crud.nomad.domain.User;
 import com.crud.nomad.domain.dto.TripDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -22,12 +20,12 @@ public class TripMapper {
     }
     public TripDto mapToTripDto(final Trip trip) {
         TripDto tripDto = new TripDto();
-                trip.setTripId(trip.getTripId());
-                trip.setDateStart(trip.getDateStart());
-                trip.setDateEnd(trip.getDateEnd());
-                trip.setDestinationCountry(trip.getDestinationCountry());
-                trip.setTripStatus(trip.getTripStatus());
-                trip.setUserList(trip.getUserList());
+            tripDto.setTripId(trip.getTripId());
+            tripDto.setDateStart(trip.getDateStart());
+            tripDto.setDateEnd(trip.getDateEnd());
+            tripDto.setDestinationCountry(trip.getDestinationCountry());
+            tripDto.setTripStatus(trip.getTripStatus());
+            tripDto.setUserList(trip.getUserList());
         return tripDto;
     }
     public List<TripDto> mapToTripDtoList(final List<Trip> tripList){

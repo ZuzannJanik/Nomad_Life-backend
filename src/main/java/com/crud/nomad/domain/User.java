@@ -37,14 +37,6 @@ public class User {
     @OneToOne(mappedBy = "user")
     private Vaccination vaccinations;
 
-    public void addTrip(Trip trip) {
-        this.tripList.add(trip);
-        trip.getUserList().add(this);
-    }
-    public void removeTrip(Trip trip) {
-        this.tripList.remove(trip);
-        trip.getUserList().remove(this);
-    }
     public User (Long userId, String firstName, String surname, String homeland) {
         this.userId = userId;
         this.firstName = firstName;

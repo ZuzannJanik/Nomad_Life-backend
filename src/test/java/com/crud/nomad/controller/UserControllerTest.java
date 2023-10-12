@@ -41,7 +41,7 @@ class UserControllerTest {
             //When&Then
             mockMvc
                     .perform(MockMvcRequestBuilders
-                            .get("/v1/users")
+                            .get("/api/v1/users")
                             .contentType(MediaType.APPLICATION_JSON))
                     .andExpect(MockMvcResultMatchers.status().is(200))
                     .andExpect(MockMvcResultMatchers.jsonPath("$", Matchers.hasSize(1)));
@@ -56,7 +56,7 @@ class UserControllerTest {
             //When&Then
             mockMvc
                     .perform(MockMvcRequestBuilders
-                            .get("/v1/users/1")
+                            .get("/api/v1/users/1")
                             .contentType(MediaType.APPLICATION_JSON))
                     .andExpect(MockMvcResultMatchers.status().is(200))
                     .andExpect(MockMvcResultMatchers.jsonPath("$.userId", Matchers.is(1)));
@@ -68,7 +68,7 @@ class UserControllerTest {
             //When & Then
             mockMvc
                     .perform(MockMvcRequestBuilders
-                            .delete("/v1/users/1")
+                            .delete("/api/v1/users/1")
                             .contentType(MediaType.APPLICATION_JSON))
                     .andExpect(MockMvcResultMatchers.status().is(200));
         }
@@ -86,11 +86,14 @@ class UserControllerTest {
             //When&Then
             mockMvc
                     .perform(MockMvcRequestBuilders
-                            .post("/v1/users")
+                            .post("/api/v1/users")
                             .contentType(MediaType.APPLICATION_JSON)
                             .characterEncoding("UTF-8")
                             .content(jsonContent))
-                    .andExpect(MockMvcResultMatchers.status().is(200));
+                    .andExpect(MockMvcResultMatchers.status().is(200))
+                    .andExpect(MockMvcResultMatchers.jsonPath("$.firstName", Matchers.is("1Name")))
+                    .andExpect(MockMvcResultMatchers.jsonPath("$.surName", Matchers.is("2Name")))
+                    .andExpect(MockMvcResultMatchers.jsonPath("$.homeland", Matchers.is("Poland")));
         }
 
         @Test
@@ -104,7 +107,7 @@ class UserControllerTest {
             //When&Then
             mockMvc
                     .perform(MockMvcRequestBuilders
-                            .post("/v1/users")
+                            .post("/api/v1/users")
                             .contentType(MediaType.APPLICATION_JSON)
                             .characterEncoding("UTF-8")
                             .content(jsonContent))
