@@ -103,7 +103,7 @@ class UserControllerTest {
         @Test
         void shouldCreateUser() throws Exception {
             //Given
-            UserDto userDto = new UserDto();
+            UserDto userDto = new UserDto(1L, "1Name", "2Name", "Poland", new HashSet<>(), new ArrayList<>());
 
             Gson gson = new GsonBuilder()
                     .registerTypeAdapter(LocalDate.class, new LocalDateTypeAdapter())

@@ -26,7 +26,7 @@ class VaccinationMapperTest {
     }
 
     @Test
-    void mapToVaccination() {
+    void testMapToVaccinationDto() {
         //Given
     Vaccination vaccination = new Vaccination(1L, "Disease",  LocalDate.of(2000, 12, 12), VacType.COMPLETED, new User());
 
@@ -41,9 +41,9 @@ class VaccinationMapperTest {
     }
 
     @Test
-    void mapToVaccinationDto() {
+    void testMapToVaccination() {
         //Given
-    VaccinationDto vaccinationDto = new VaccinationDto(1L, "Disease",  LocalDate.of(2000, 12, 12), VacType.COMPLETED, new UserDto());
+    VaccinationDto vaccinationDto = new VaccinationDto(1L, "Disease",  LocalDate.of(2000, 12, 12), VacType.COMPLETED);
 
         //When
     Vaccination vaccination = vaccinationMapper.mapToVaccination(vaccinationDto);
@@ -56,7 +56,7 @@ class VaccinationMapperTest {
     }
 
     @Test
-    void mapToVaccinationDtoList() {
+    void testMapToVaccinationDtoList() {
         //Given
         Vaccination vaccination1 = new Vaccination(1L, "Disease",  LocalDate.of(2000, 12, 12), VacType.COMPLETED, new User());
         Vaccination vaccination2 = new Vaccination(1L, "Disease",  LocalDate.of(2000, 12, 12), VacType.COMPLETED, new User());

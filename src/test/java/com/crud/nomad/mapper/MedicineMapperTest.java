@@ -21,7 +21,7 @@ class MedicineMapperTest {
     }
 
     @Test
-    void mapToMedicine() {
+    void testMapToMedicineDto() {
         //Given
         Medicine medicine = new Medicine(1L, "Apap", "Headache", MedType.BASIC, LocalDate.of(2025,12,12));
 
@@ -37,7 +37,7 @@ class MedicineMapperTest {
     }
 
     @Test
-    void mapToMedicineDto() {
+    void testMapToMedicine() {
         //Given
         MedicineDto medicineDto = new MedicineDto(1L, "Apap", "Headache", MedType.BASIC, LocalDate.of(2025,12,12));
 
@@ -53,7 +53,7 @@ class MedicineMapperTest {
     }
 
     @Test
-    void mapToMedicineDtoList() {
+    void testMapToMedicineDtoList() {
         //Given
         Medicine medicine1 = new Medicine(1L, "Apap", "Headache", MedType.BASIC, LocalDate.of(2025,12,12));
         Medicine medicine2 = new Medicine(2L, "Apap", "Headache", MedType.BASIC, LocalDate.of(2025,12,12));

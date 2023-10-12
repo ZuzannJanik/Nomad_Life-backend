@@ -14,5 +14,4 @@ public class VaccinationDto {
     private String diseaseName;
     private LocalDate lastVac;
     private VacType vacType;
-    private UserDto userDto;
 }
