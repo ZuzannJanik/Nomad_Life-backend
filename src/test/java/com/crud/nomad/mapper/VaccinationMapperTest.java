@@ -7,14 +7,18 @@ import com.crud.nomad.domain.dto.VaccinationDto;
 import com.crud.nomad.domain.enums.VacType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-
+@SpringBootTest
 class VaccinationMapperTest {
+    @Autowired
     private VaccinationMapper vaccinationMapper;
     @BeforeEach
     void setUp() {

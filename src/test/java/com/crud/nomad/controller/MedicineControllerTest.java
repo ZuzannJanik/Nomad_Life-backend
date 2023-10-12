@@ -2,7 +2,6 @@ package com.crud.nomad.controller;
 import com.crud.nomad.domain.Medicine;
 import com.crud.nomad.domain.dto.MedicineDto;
 import com.crud.nomad.domain.enums.MedType;
-import com.crud.nomad.exceptions.MedicineNotFoundException;
 import com.crud.nomad.mapper.MedicineMapper;
 import com.crud.nomad.service.MedicineService;
 import com.google.gson.Gson;
@@ -51,18 +50,18 @@ public class MedicineControllerTest {
     }
 
     @Test
-    void shouldFetchMedicineById() throws Exception, MedicineNotFoundException {
+    void shouldFetchMedicineById() throws Exception {
         //Given
-        Medicine medicine = new Medicine();
-        when(dbService.getMedicine(1L)).thenReturn(medicine);
+        Medicine medicine = new Medicine(500L, "Apap", "Headache", MedType.BASIC, LocalDate.of(2025,12,12));
+        when(dbService.getMedicine(500L)).thenReturn(medicine);
 
         //When&Then
         mockMvc
                 .perform(MockMvcRequestBuilders
-                        .get("/api/v1/medicine/1")
+                        .get("/api/v1/medicines/500")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().is(200))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.medicineId", Matchers.is(1)));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.medicineId", Matchers.is(500)));
     }
 
     @Test
@@ -71,7 +70,7 @@ public class MedicineControllerTest {
         //When & Then
         mockMvc
                 .perform(MockMvcRequestBuilders
-                        .delete("/api/v1/medicine/1")
+                        .delete("/api/v1/medicines/1")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().is(200));
     }
@@ -91,7 +90,7 @@ public class MedicineControllerTest {
         //When&Then
         mockMvc
                 .perform(MockMvcRequestBuilders
-                        .post("/api/v1/medicine")
+                        .post("/api/v1/medicines")
                         .contentType(MediaType.APPLICATION_JSON)
                         .characterEncoding("UTF-8")
                         .content(jsonContent))
