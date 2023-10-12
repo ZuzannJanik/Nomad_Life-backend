@@ -1,6 +1,8 @@
 package com.crud.nomad.domain;
 
 import com.crud.nomad.domain.enums.VacType;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -15,7 +17,7 @@ import java.time.LocalDate;
 @Entity
 public class Vaccination {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "vac_id")
     private Long vacId;
 
@@ -28,7 +30,7 @@ public class Vaccination {
     @Column(name = "complete")
     private VacType vacType;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 

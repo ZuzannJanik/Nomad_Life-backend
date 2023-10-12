@@ -13,18 +13,15 @@ import java.util.List;
 public class TripService {
     private final TripRepository repository;
     public List<Trip> getAllTrips() {
-
         return repository.findAll();
     }
     public Trip saveTrip(final Trip trip) {
-
         return repository.save(trip);
     }
     public Trip getTrip(final Long tripId) throws TripNotFoundException {
         return repository.findById(tripId).orElseThrow(TripNotFoundException::new);
     }
     public void deleteTrip(final Long tripId) {
-
         repository.deleteById(tripId);
     }
 }

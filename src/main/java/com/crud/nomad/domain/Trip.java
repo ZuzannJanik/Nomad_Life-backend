@@ -17,7 +17,7 @@ import java.util.*;
 public class Trip {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "trip_id")
     private Long tripId;
 
@@ -44,15 +44,6 @@ public class Trip {
     )
     @Builder.Default
     private Set<User> userList = new HashSet<>();
-
-    public void addUser(User user) {
-        this.userList.add(user);
-        user.getTripList().add(this);
-    }
-    public void removeUser(User user) {
-        this.userList.remove(user);
-        user.getTripList().remove(this);
-    }
     public void updateStatus() {
         if (dateStart.isAfter(LocalDate.now())) {
             setTripStatus(TripStatus.PLANNED);
