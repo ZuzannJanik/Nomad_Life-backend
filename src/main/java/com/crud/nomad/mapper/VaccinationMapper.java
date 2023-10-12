@@ -1,6 +1,5 @@
 package com.crud.nomad.mapper;
 
-import com.crud.nomad.domain.User;
 import com.crud.nomad.domain.Vaccination;
 import com.crud.nomad.domain.dto.UserDto;
 import com.crud.nomad.domain.dto.VaccinationDto;
@@ -13,7 +12,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class VaccinationMapper {
     @Autowired
-    UserMapper userMapper;
+    private UserMapper userMapper;
 
     public Vaccination mapToVaccination(final VaccinationDto vaccinationDto) {
         return Vaccination.builder()
@@ -25,16 +24,16 @@ public class VaccinationMapper {
                 .build();
     }
     public VaccinationDto mapToVaccinationDto(final Vaccination vaccination) {
-                VaccinationDto vaccinationDto = new VaccinationDto();
-                vaccinationDto.setVacId(vaccination.getVacId());
-                vaccinationDto.setDiseaseName(vaccination.getDiseaseName());
-                vaccinationDto.setLastVac(vaccination.getLastVac());
-                vaccinationDto.setVacType(vaccination.getVacType());
-                UserMapper userMapper = new UserMapper();
-                UserDto userDto = userMapper.mapToUserDto(vaccination.getUser());
-                vaccinationDto.setUserDto(userDto);
-                return vaccinationDto;
-            }
+        VaccinationDto vaccinationDto = new VaccinationDto();
+        vaccinationDto.setVacId(vaccination.getVacId());
+        vaccinationDto.setDiseaseName(vaccination.getDiseaseName());
+        vaccinationDto.setLastVac(vaccination.getLastVac());
+        vaccinationDto.setVacType(vaccination.getVacType());
+        UserMapper userMapper = new UserMapper();
+        UserDto userDto = userMapper.mapToUserDto(vaccination.getUser());
+        vaccinationDto.setUserDto(userDto);
+        return vaccinationDto;
+    }
 
 
         public List<VaccinationDto> mapToVaccinationDtoList(final List<Vaccination> vaccinationList){

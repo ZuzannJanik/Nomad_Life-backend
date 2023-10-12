@@ -13,18 +13,15 @@ import java.util.List;
 public class VaccinationService {
     private final VaccinationRepository repository;
     public List<Vaccination> getAllVaccinations() {
-
         return repository.findAll();
     }
     public Vaccination saveVaccination(final Vaccination vaccination) {
-
         return repository.save(vaccination);
     }
     public Vaccination getVaccination(final Long vacId) throws VaccinationNotFoundException {
         return repository.findById(vacId).orElseThrow(VaccinationNotFoundException::new);
     }
     public void deleteVaccination(final Long vacId) {
-
         repository.deleteById(vacId);
     }
 }
