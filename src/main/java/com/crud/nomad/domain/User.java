@@ -13,7 +13,7 @@ import java.util.*;
 @Entity
 public class User {
     @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @GeneratedValue (strategy = GenerationType.AUTO)
     @Column(name = "user_id")
     private Long userId;
 
@@ -33,9 +33,9 @@ public class User {
     @Builder.Default
     private Set<Trip> tripList = new HashSet<>();
 
-
-    @OneToOne(mappedBy = "user")
-    private Vaccination vaccinations;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @Builder.Default
+    private List<Vaccination> vaccinationList = new ArrayList<>();
 
     public User (Long userId, String firstName, String surname, String homeland) {
         this.userId = userId;
