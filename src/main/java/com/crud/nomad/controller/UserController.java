@@ -1,6 +1,8 @@
 package com.crud.nomad.controller;
 
+import com.crud.nomad.domain.Trip;
 import com.crud.nomad.domain.User;
+import com.crud.nomad.domain.dto.TripDto;
 import com.crud.nomad.domain.dto.UserDto;
 import com.crud.nomad.exceptions.UserNotFoundException;
 import com.crud.nomad.mapper.UserMapper;
@@ -43,10 +45,9 @@ public class UserController {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<UserDto> createUser(@RequestBody UserDto userDto) {
+    public ResponseEntity<Void> createUser(@RequestBody UserDto userDto) {
         User user = userMapper.mapToUser(userDto);
         User savedUser = service.saveUser(user);
-        return ResponseEntity.ok(userMapper.mapToUserDto(savedUser));
+        return ResponseEntity.ok().build();
     }
-
 }

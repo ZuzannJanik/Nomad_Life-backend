@@ -103,12 +103,11 @@ class UserControllerTest {
         @Test
         void shouldCreateUser() throws Exception {
             //Given
-            UserDto userDto = new UserDto();
-
+            User user = new User(1L, "1Name", "2Name", "Poland", new HashSet<>(), new ArrayList<>());
             Gson gson = new GsonBuilder()
                     .registerTypeAdapter(LocalDate.class, new LocalDateTypeAdapter())
                     .create();
-            String jsonContent = gson.toJson(userDto);
+            String jsonContent = gson.toJson(user);
 
             //When&Then
             mockMvc

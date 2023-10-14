@@ -44,15 +44,7 @@ public class Trip {
     )
     @Builder.Default
     private Set<User> userList = new HashSet<>();
-    public void updateStatus() {
-        if (dateStart.isAfter(LocalDate.now())) {
-            setTripStatus(TripStatus.PLANNED);
-        } else if (dateStart.isBefore(LocalDate.now()) && dateEnd.isAfter(LocalDate.now())) {
-            setTripStatus(TripStatus.ACTIVE);
-        } else if (dateEnd.isBefore(LocalDate.now())){
-            setTripStatus(TripStatus.ENDED);
-        }
-    }
+
     public Trip (Long tripId, LocalDate dateStart, LocalDate dateEnd, String destinationCountry, TripStatus tripStatus) {
         this.tripId = tripId;
         this.dateStart = dateStart;

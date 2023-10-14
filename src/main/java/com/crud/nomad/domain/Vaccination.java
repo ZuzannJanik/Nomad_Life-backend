@@ -1,8 +1,6 @@
 package com.crud.nomad.domain;
 
 import com.crud.nomad.domain.enums.VacType;
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -40,5 +38,4 @@ public class Vaccination {
         this.lastVac = lastVac;
         this.vacType = vacType;
     }
-
 }

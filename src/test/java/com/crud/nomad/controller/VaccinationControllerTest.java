@@ -82,7 +82,7 @@ public class VaccinationControllerTest {
     void shouldUpdateVaccination() throws Exception {
         //Given
         Vaccination vaccination = new Vaccination();
-        VaccinationDto vaccinationDto = new VaccinationDto(1L, "Disease",  LocalDate.of(2000, 12, 12), VacType.COMPLETED, new UserDto());
+        VaccinationDto vaccinationDto = new VaccinationDto(1L, "Disease",  LocalDate.of(2000, 12, 12), VacType.COMPLETED);
         when(dbService.saveVaccination(any(Vaccination.class))).thenReturn(vaccination);
 
         Gson gson = new GsonBuilder()
@@ -103,7 +103,7 @@ public class VaccinationControllerTest {
     @Test
     void shouldCreateVaccination() throws Exception {
         //Given
-        VaccinationDto vaccinationDto = new VaccinationDto(1L, "Disease",  LocalDate.of(2000, 12, 12), VacType.COMPLETED, new UserDto());
+        VaccinationDto vaccinationDto = new VaccinationDto(1L, "Disease",  LocalDate.of(2000, 12, 12), VacType.COMPLETED);
 
         Gson gson = new GsonBuilder()
                 .registerTypeAdapter(LocalDate.class, new LocalDateTypeAdapter())

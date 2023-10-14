@@ -22,7 +22,7 @@ class TripMapperTest {
     }
 
     @Test
-    void mapToTrip() {
+    void mapToTripDto() {
         //Given
     Trip trip = new Trip(3L, LocalDate.of(2023,12,12), LocalDate.of(2024,12,12), "Canada", TripStatus.PLANNED, new HashSet<>());
 
@@ -38,7 +38,7 @@ class TripMapperTest {
     }
 
     @Test
-    void mapToTripDto() {
+    void mapToTrip() {
         //Given
         TripDto tripDto = new TripDto(1L, LocalDate.of(2023,12,12), LocalDate.of(2024,12,12), "Canada", TripStatus.PLANNED, new HashSet<>());
 

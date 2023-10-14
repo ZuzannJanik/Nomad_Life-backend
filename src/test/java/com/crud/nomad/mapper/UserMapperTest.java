@@ -18,7 +18,7 @@ public class UserMapperTest {
     }
 
     @Test
-    void testMapToUser() {
+    void testMapToUserDto() {
         //Given
         User user = new User(1L, "1Name", "2Name", "Poland", new HashSet<>(),new ArrayList<>());
 
@@ -33,7 +33,7 @@ public class UserMapperTest {
     }
 
     @Test
-    void mapToUserDto() {
+    void testMapToUser() {
         //Given
         UserDto userDto = new UserDto(1L, "1Name", "2Name", "Poland", new HashSet<>(), new ArrayList<>());
 
@@ -48,7 +48,7 @@ public class UserMapperTest {
     }
 
     @Test
-    void mapToUserDtoList() {
+    void testMapToUserDtoList() {
       //Given
         User user1 = new User(1L, "1Name", "2Name", "Poland", new HashSet<>(), new ArrayList<>());
         User user2 = new User(2L, "3Name", "4Name", "Hong Kong", new HashSet<>(), new ArrayList<>());

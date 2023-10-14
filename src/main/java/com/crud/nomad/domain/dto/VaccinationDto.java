@@ -1,6 +1,5 @@
 package com.crud.nomad.domain.dto;
 
-import com.crud.nomad.domain.User;
 import com.crud.nomad.domain.enums.VacType;;
 import lombok.*;
 
@@ -14,5 +13,4 @@ public class VaccinationDto {
     private String diseaseName;
     private LocalDate lastVac;
     private VacType vacType;
-    private UserDto userDto;
 }
