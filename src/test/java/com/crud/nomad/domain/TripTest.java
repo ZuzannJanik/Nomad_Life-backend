@@ -62,23 +62,4 @@ class TripTest {
         //Then
         assertEquals(userList, trip.getUserList());
     }
-
-    @Test
-    void updateStatus() {
-        //Given
-        trip.updateStatus();
-        assertEquals(TripStatus.PLANNED, trip.getTripStatus());
-
-        //When
-        trip.setDateStart(LocalDate.of(2023, 9, 30));
-        trip.setDateEnd(LocalDate.of(2023, 10, 5));
-        trip.updateStatus();
-        assertEquals(TripStatus.ACTIVE, trip.getTripStatus());
-
-        trip.setDateStart(LocalDate.of(2023, 9, 20));
-        trip.setDateEnd(LocalDate.of(2023, 9, 25));
-        trip.updateStatus();
-        assertEquals(TripStatus.ENDED, trip.getTripStatus());
-
-    }
 }

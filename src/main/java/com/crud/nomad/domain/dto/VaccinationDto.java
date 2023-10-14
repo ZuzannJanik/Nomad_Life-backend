@@ -1,6 +1,5 @@
 package com.crud.nomad.domain.dto;
 
-import com.crud.nomad.domain.User;
 import com.crud.nomad.domain.enums.VacType;;
 import lombok.*;
 
