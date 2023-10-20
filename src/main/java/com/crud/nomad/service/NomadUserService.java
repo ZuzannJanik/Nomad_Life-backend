@@ -6,6 +6,7 @@ import com.crud.nomad.respository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -22,5 +23,8 @@ public class UserService {
     }
     public void deleteUser(final Long userId) {
         repository.deleteById(userId);
+    }
+    public Optional<User> getUserByLogin(String login){
+        return repository.findUserByLogin(login);
     }
 }

@@ -50,4 +50,9 @@ public class UserController {
         User savedUser = service.saveUser(user);
         return ResponseEntity.ok().build();
     }
+
+    @GetMapping(value = "/check/{login}")
+    public ResponseEntity<Boolean> checkIfUserExists(@PathVariable String login){
+        return ResponseEntity.ok(service.getUserByLogin(login).isPresent());
+    }
 }

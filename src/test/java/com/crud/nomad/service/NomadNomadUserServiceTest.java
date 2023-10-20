@@ -26,8 +26,8 @@ public class UserServiceTest {
     @Test
     public void testGetAllUsers() {
         //Given
-        User user1 = new User(1L, "Adam", "Nowak", "Poland", new HashSet<>(), new ArrayList<>());
-        User user2 = new User(2L, "Ewa", "Kowalska", "Poland", new HashSet<>(), new ArrayList<>());
+        User user1 = new User(1L, "Adam", "Nowak", "Poland", "Login","Haslo","USER", new HashSet<>(), new ArrayList<>());
+        User user2 = new User(2L, "Ewa", "Kowalska", "Poland", "Login","Haslo","USER", new HashSet<>(), new ArrayList<>());
         List<User> users = Arrays.asList(user1, user2);
         when(userRepository.findAll()).thenReturn(users);
 
@@ -42,7 +42,7 @@ public class UserServiceTest {
     @Test
     public void testSaveUser() {
         //Given
-        User user = new User(3L, "Jan", "Zielinski", "Poland", new HashSet<>(), new ArrayList<>());
+        User user = new User(3L, "Jan", "Zielinski", "Poland", "Login","Haslo","USER", new HashSet<>(), new ArrayList<>());
         when(userRepository.save(user)).thenReturn(user);
 
         //When
@@ -56,7 +56,7 @@ public class UserServiceTest {
     @Test
     public void testGetUser() throws UserNotFoundException {
         //Given
-        User user = new User(4L, "Anna", "Nowakowska", "Poland", new HashSet<>(), new ArrayList<>());
+        User user = new User(4L, "Anna", "Nowakowska", "Poland", "Login","Haslo","USER", new HashSet<>(), new ArrayList<>());
         when(userRepository.findById(4L)).thenReturn(Optional.of(user));
 
         //When

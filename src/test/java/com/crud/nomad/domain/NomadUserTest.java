@@ -2,6 +2,8 @@ package com.crud.nomad.domain;
 
 import com.crud.nomad.domain.enums.TripStatus;
 import com.crud.nomad.domain.enums.VacType;
+import com.crud.nomad.respository.UserRepository;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.time.LocalDate;
@@ -15,10 +17,11 @@ import static org.junit.jupiter.api.Assertions.*;
 class UserTest {
 
     private User user;
+    private UserRepository userRepository;
 
     @BeforeEach
     void setUp() {
-        user = new User(1L, "Jan", "Kowalski", "Poland");
+        user = new User(1L, "Jan", "Kowalski", "Poland", "Login", "Password", "USER");
     }
 
     @Test

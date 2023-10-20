@@ -16,6 +16,9 @@ public class UserMapper {
                 .firstName(userDto.getFirstName())
                 .surname(userDto.getSurname())
                 .homeland(userDto.getHomeland())
+                .login(userDto.getLogin())
+                .password(userDto.getPassword())
+                .role(userDto.getRole())
                 .tripList(userDto.getTripList())
                 .vaccinationList(userDto.getVaccinationList())
                 .build();
@@ -27,6 +30,9 @@ public class UserMapper {
                 .firstName(user.getFirstName())
                 .surname(user.getSurname())
                 .homeland(user.getHomeland())
+                .login(user.getLogin())
+                .password(user.getPassword())
+                .role(user.getRole())
                 .tripList(user.getTripList())
                 .vaccinationList(user.getVaccinationList())
                 .build();
