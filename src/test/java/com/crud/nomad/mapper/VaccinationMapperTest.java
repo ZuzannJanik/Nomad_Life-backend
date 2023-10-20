@@ -1,8 +1,7 @@
 package com.crud.nomad.mapper;
 
-import com.crud.nomad.domain.User;
+import com.crud.nomad.domain.NomadUser;
 import com.crud.nomad.domain.Vaccination;
-import com.crud.nomad.domain.dto.UserDto;
 import com.crud.nomad.domain.dto.VaccinationDto;
 import com.crud.nomad.domain.enums.VacType;
 import org.junit.jupiter.api.BeforeEach;
@@ -12,7 +11,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -28,7 +26,7 @@ class VaccinationMapperTest {
     @Test
     void testMapToVaccinationDto() {
         //Given
-    Vaccination vaccination = new Vaccination(1L, "Disease",  LocalDate.of(2000, 12, 12), VacType.COMPLETED, new User());
+    Vaccination vaccination = new Vaccination(1L, "Disease",  LocalDate.of(2000, 12, 12), VacType.COMPLETED, new NomadUser());
 
         //When
     VaccinationDto vaccinationDto = vaccinationMapper.mapToVaccinationDto(vaccination);
@@ -58,8 +56,8 @@ class VaccinationMapperTest {
     @Test
     void testMapToVaccinationDtoList() {
         //Given
-        Vaccination vaccination1 = new Vaccination(1L, "Disease",  LocalDate.of(2000, 12, 12), VacType.COMPLETED, new User());
-        Vaccination vaccination2 = new Vaccination(1L, "Disease",  LocalDate.of(2000, 12, 12), VacType.COMPLETED, new User());
+        Vaccination vaccination1 = new Vaccination(1L, "Disease",  LocalDate.of(2000, 12, 12), VacType.COMPLETED, new NomadUser());
+        Vaccination vaccination2 = new Vaccination(1L, "Disease",  LocalDate.of(2000, 12, 12), VacType.COMPLETED, new NomadUser());
         List<Vaccination> vaccinationsList = new ArrayList<>();
         vaccinationsList.add(vaccination1);
         vaccinationsList.add(vaccination2);

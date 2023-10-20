@@ -2,8 +2,7 @@ package com.crud.nomad.domain;
 
 import com.crud.nomad.domain.enums.TripStatus;
 import com.crud.nomad.domain.enums.VacType;
-import com.crud.nomad.respository.UserRepository;
-import org.junit.jupiter.api.AfterEach;
+import com.crud.nomad.respository.NomadUserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.time.LocalDate;
@@ -14,38 +13,38 @@ import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class UserTest {
+class NomadUserTest {
 
-    private User user;
-    private UserRepository userRepository;
+    private NomadUser nomadUser;
+    private NomadUserRepository nomadUserRepository;
 
     @BeforeEach
     void setUp() {
-        user = new User(1L, "Jan", "Kowalski", "Poland", "Login", "Password", "USER");
+        nomadUser = new NomadUser(1L, "Jan", "Kowalski", "Poland", "Login", "Password", "USER");
     }
 
     @Test
     void getUserId() {
         //Then
-        assertEquals(1L, user.getUserId());
+        assertEquals(1L, nomadUser.getUserId());
     }
 
     @Test
     void getFirstName() {
         //Then
-        assertEquals("Jan", user.getFirstName());
+        assertEquals("Jan", nomadUser.getFirstName());
     }
 
     @Test
     void getSurname() {
         //Then
-        assertEquals("Kowalski", user.getSurname());
+        assertEquals("Kowalski", nomadUser.getSurname());
     }
 
     @Test
     void getHomeland() {
         //Then
-        assertEquals("Poland", user.getHomeland());
+        assertEquals("Poland", nomadUser.getHomeland());
     }
 
     @Test
@@ -56,43 +55,43 @@ class UserTest {
         tripList.add(trip);
 
         //When
-        user.setTripList(tripList);
+        nomadUser.setTripList(tripList);
 
         //Then
-        assertEquals(tripList, user.getTripList());
+        assertEquals(tripList, nomadUser.getTripList());
     }
 
     @Test
     void getVaccinations() {
         //Then
-        assertNull(user.getVaccinationList());
+        assertNull(nomadUser.getVaccinationList());
     }
 
     @Test
     void setFirstName() {
         //When
-        user.setFirstName("Adam");
+        nomadUser.setFirstName("Adam");
 
         //Then
-        assertEquals("Adam", user.getFirstName());
+        assertEquals("Adam", nomadUser.getFirstName());
     }
 
     @Test
     void setSurname() {
         //When
-        user.setSurname("Nowak");
+        nomadUser.setSurname("Nowak");
 
         //Then
-        assertEquals("Nowak", user.getSurname());
+        assertEquals("Nowak", nomadUser.getSurname());
     }
 
     @Test
     void setHomeland() {
         //When
-        user.setHomeland("Germany");
+        nomadUser.setHomeland("Germany");
 
         //Then
-        assertEquals("Germany", user.getHomeland());
+        assertEquals("Germany", nomadUser.getHomeland());
     }
 
     @Test
@@ -103,10 +102,10 @@ class UserTest {
         tripList.add(trip);
 
         //When
-        user.setTripList(tripList);
+        nomadUser.setTripList(tripList);
 
         //Then
-        assertEquals(tripList, user.getTripList());
+        assertEquals(tripList, nomadUser.getTripList());
     }
 
     @Test
@@ -117,9 +116,9 @@ class UserTest {
         vaccinationList.add(vaccination);
 
         //When
-        user.setVaccinationList(vaccinationList);
+        nomadUser.setVaccinationList(vaccinationList);
 
         //Then
-        assertEquals(vaccinationList, user.getVaccinationList());
+        assertEquals(vaccinationList, nomadUser.getVaccinationList());
     }
 }

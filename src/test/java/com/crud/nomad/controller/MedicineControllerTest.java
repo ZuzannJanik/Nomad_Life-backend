@@ -7,8 +7,10 @@ import com.crud.nomad.service.MedicineService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.hamcrest.Matchers;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.mock.mockito.SpyBean;
@@ -25,6 +27,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 @SpringJUnitWebConfig
 @WebMvcTest(MedicineController.class)
+@AutoConfigureMockMvc(addFilters=false)
 public class MedicineControllerTest {
 
     @Autowired
@@ -47,21 +50,23 @@ public class MedicineControllerTest {
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().is(200))
                 .andExpect(MockMvcResultMatchers.jsonPath("$", Matchers.hasSize(1)));
+
     }
 
     @Test
     void shouldFetchMedicineById() throws Exception {
         //Given
-        Medicine medicine = new Medicine(500L, "Apap", "Headache", MedType.BASIC, LocalDate.of(2025,12,12));
-        when(dbService.getMedicine(500L)).thenReturn(medicine);
+        Medicine medicine = new Medicine(1L, "Apap", "Headache", MedType.BASIC, LocalDate.of(2025,12,12));
+        when(dbService.getMedicine(1L)).thenReturn(medicine);
 
         //When&Then
         mockMvc
                 .perform(MockMvcRequestBuilders
-                        .get("/api/v1/medicines/500")
+                        .get("/api/v1/medicines/1")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().is(200))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.medicineId", Matchers.is(500)));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.medicineId", Matchers.is(1)));
+
     }
 
     @Test

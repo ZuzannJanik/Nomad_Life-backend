@@ -1,12 +1,10 @@
 package com.crud.nomad.controller;
 
-import com.crud.nomad.domain.Trip;
-import com.crud.nomad.domain.User;
-import com.crud.nomad.domain.dto.TripDto;
-import com.crud.nomad.domain.dto.UserDto;
-import com.crud.nomad.exceptions.UserNotFoundException;
-import com.crud.nomad.mapper.UserMapper;
-import com.crud.nomad.service.UserService;
+import com.crud.nomad.domain.NomadUser;
+import com.crud.nomad.domain.dto.NomadUserDto;
+import com.crud.nomad.exceptions.NomadUserNotFoundException;
+import com.crud.nomad.mapper.NomadUserMapper;
+import com.crud.nomad.service.NomadUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -17,42 +15,42 @@ import java.util.List;
 @RequestMapping("/api/v1/users")
 @RequiredArgsConstructor
 @CrossOrigin("*")
-public class UserController {
-    private final UserMapper userMapper;
-    private final UserService service;
+public class NomadUserController {
+    private final NomadUserMapper nomadUserMapper;
+    private final NomadUserService service;
     @GetMapping
-    public ResponseEntity<List<UserDto>> getUsers() {
-        List<User> users = service.getAllUsers();
-        return ResponseEntity.ok(userMapper.mapToUserDtoList(users));
+    public ResponseEntity<List<NomadUserDto>> getUsers() {
+        List<NomadUser> nomadUsers = service.getAllNomadUsers();
+        return ResponseEntity.ok(nomadUserMapper.mapToUserDtoList(nomadUsers));
     }
 
     @GetMapping(value = "{userId}")
-    public ResponseEntity<UserDto> getUser(@PathVariable Long userId) throws UserNotFoundException {
-        return ResponseEntity.ok(userMapper.mapToUserDto(service.getUser(userId)));
+    public ResponseEntity<NomadUserDto> getNomadUser(@PathVariable Long userId) throws NomadUserNotFoundException {
+        return ResponseEntity.ok(nomadUserMapper.mapToUserDto(service.getNomadUser(userId)));
     }
 
     @DeleteMapping(value = "{userId}")
-    public ResponseEntity<UserDto> deleteUser(@PathVariable Long userId)  throws  UserNotFoundException {
-        service.deleteUser(userId);
+    public ResponseEntity<NomadUserDto> deleteNomadUser(@PathVariable Long userId)  throws NomadUserNotFoundException {
+        service.deleteNomadUser(userId);
         return ResponseEntity.ok().build();
     }
 
     @PutMapping
-    public ResponseEntity<UserDto> updateUser(@RequestBody UserDto userDto) {
-        User user = userMapper.mapToUser(userDto);
-        User savedUser = service.saveUser(user);
-        return ResponseEntity.ok(userMapper.mapToUserDto(savedUser));
+    public ResponseEntity<NomadUserDto> updateNomadUser(@RequestBody NomadUserDto userDto) {
+        NomadUser nomadUser = nomadUserMapper.mapToUser(userDto);
+        NomadUser savedNomadUser = service.saveNomadUser(nomadUser);
+        return ResponseEntity.ok(nomadUserMapper.mapToUserDto(savedNomadUser));
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> createUser(@RequestBody UserDto userDto) {
-        User user = userMapper.mapToUser(userDto);
-        User savedUser = service.saveUser(user);
+    public ResponseEntity<Void> createUser(@RequestBody NomadUserDto userDto) {
+        NomadUser nomadUser = nomadUserMapper.mapToUser(userDto);
+        NomadUser savedNomadUser = service.saveNomadUser(nomadUser);
         return ResponseEntity.ok().build();
     }
 
     @GetMapping(value = "/check/{login}")
     public ResponseEntity<Boolean> checkIfUserExists(@PathVariable String login){
-        return ResponseEntity.ok(service.getUserByLogin(login).isPresent());
+        return ResponseEntity.ok(service.getNomadUserByLogin(login).isPresent());
     }
 }

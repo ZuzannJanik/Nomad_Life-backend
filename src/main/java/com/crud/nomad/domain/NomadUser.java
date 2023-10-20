@@ -1,6 +1,5 @@
 package com.crud.nomad.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 import jakarta.persistence.*;
@@ -13,7 +12,7 @@ import java.util.*;
 @Builder
 @Table(name = "users")
 @Entity
-public class User {
+public class NomadUser {
     @Id
     @GeneratedValue (strategy = GenerationType.AUTO)
     @Column(name = "user_id")
@@ -44,17 +43,17 @@ public class User {
     private String role;
 
     @ManyToMany(targetEntity = Trip.class,
-            mappedBy = "userList",
+            mappedBy = "nomadUserList",
             cascade = {CascadeType.DETACH,CascadeType.MERGE, CascadeType.PERSIST,CascadeType.REFRESH},
             fetch = FetchType.LAZY)
     @Builder.Default
     private Set<Trip> tripList = new HashSet<>();
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "nomadUser", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @Builder.Default
     private List<Vaccination> vaccinationList = new ArrayList<>();
 
-    public User (Long userId, String firstName, String surname, String homeland, String login, String password, String role) {
+    public NomadUser(Long userId, String firstName, String surname, String homeland, String login, String password, String role) {
         this.userId = userId;
         this.firstName = firstName;
         this.surname = surname;

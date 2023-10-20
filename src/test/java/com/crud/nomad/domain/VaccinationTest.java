@@ -1,6 +1,7 @@
 package com.crud.nomad.domain;
 
 import com.crud.nomad.domain.enums.VacType;
+import com.crud.nomad.respository.VaccinationRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -11,6 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class VaccinationTest {
 
     private Vaccination vaccination;
+    private VaccinationRepository vaccinationRepository;
 
     @BeforeEach
     void setUp() {
@@ -44,7 +46,7 @@ class VaccinationTest {
     @Test
     void getUser() {
         //Then
-        assertNull(vaccination.getUser());
+        assertNull(vaccination.getNomadUser());
     }
 
     @Test
@@ -77,12 +79,12 @@ class VaccinationTest {
     @Test
     void setUser() {
         //Given
-        User user = new User(1L, "Jan", "Kowalski", "Poland");
+        NomadUser nomadUser = new NomadUser(1L, "Jan", "Kowalski", "Poland", "Login", "Password", "USER");
 
         //When
-        vaccination.setUser(user);
+        vaccination.setNomadUser(nomadUser);
 
         //Then
-        assertEquals(user, vaccination.getUser());
+        assertEquals(nomadUser, vaccination.getNomadUser());
     }
 }

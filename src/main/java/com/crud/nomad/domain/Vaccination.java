@@ -22,7 +22,7 @@ public class Vaccination {
     @Column(name = "disease")
     private String diseaseName;
 
-    @Column(name = "lastVac")
+    @Column(name = "last_vac")
     private LocalDate lastVac;
 
     @Column(name = "complete")
@@ -30,7 +30,7 @@ public class Vaccination {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private User user;
+    private NomadUser nomadUser;
 
     public Vaccination(Long vacId, String diseaseName, LocalDate lastVac, VacType vacType) {
         this.vacId = vacId;

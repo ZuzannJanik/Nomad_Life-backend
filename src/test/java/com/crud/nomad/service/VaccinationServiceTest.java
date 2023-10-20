@@ -1,6 +1,6 @@
 package com.crud.nomad.service;
 
-import com.crud.nomad.domain.User;
+import com.crud.nomad.domain.NomadUser;
 import com.crud.nomad.domain.Vaccination;
 import com.crud.nomad.domain.enums.VacType;
 import com.crud.nomad.exceptions.VaccinationNotFoundException;
@@ -28,10 +28,10 @@ public class VaccinationServiceTest {
     @Test
     public void testGetAllVaccinations() {
         //Given
-        User user1 = new User(1L, "Adam", "Nowak", "Poland", new HashSet<>(), new ArrayList<>());
-        User user2 = new User(2L, "Ewa", "Kowalska", "Poland", new HashSet<>(), new ArrayList<>());
-        Vaccination vaccination1 = new Vaccination(1L, "Disease1", LocalDate.of(2023, 1, 1), VacType.COMPLETED, user1);
-        Vaccination vaccination2 = new Vaccination(2L, "Disease2", LocalDate.of(2023, 2, 1), VacType.COMPLETED, user2);
+        NomadUser nomadUser1 = new NomadUser(1L, "Adam", "Nowak", "Poland", "Login","Haslo","USER", new HashSet<>(), new ArrayList<>());
+        NomadUser nomadUser2 = new NomadUser(2L, "Ewa", "Kowalska", "Poland", "Login","Haslo","USER", new HashSet<>(), new ArrayList<>());
+        Vaccination vaccination1 = new Vaccination(1L, "Disease1", LocalDate.of(2023, 1, 1), VacType.COMPLETED, nomadUser1);
+        Vaccination vaccination2 = new Vaccination(2L, "Disease2", LocalDate.of(2023, 2, 1), VacType.COMPLETED, nomadUser2);
         List<Vaccination> vaccinations = Arrays.asList(vaccination1, vaccination2);
         when(vaccinationRepository.findAll()).thenReturn(vaccinations);
 
@@ -46,8 +46,8 @@ public class VaccinationServiceTest {
     @Test
     public void testSaveVaccination() {
         //Given
-        User user = new User(3L, "Jan", "Zielinski", "Poland", new HashSet<>(), new ArrayList<>());
-        Vaccination vaccination = new Vaccination(3L, "Disease3", LocalDate.of(2023, 3, 1), VacType.REPEATABLE, user);
+        NomadUser nomadUser = new NomadUser(3L, "Jan", "Zielinski", "Poland", "Login","Haslo", "USER", new HashSet<>(), new ArrayList<>());
+        Vaccination vaccination = new Vaccination(3L, "Disease3", LocalDate.of(2023, 3, 1), VacType.REPEATABLE, nomadUser);
         when(vaccinationRepository.save(vaccination)).thenReturn(vaccination);
 
         //When
@@ -61,8 +61,8 @@ public class VaccinationServiceTest {
     @Test
     public void testGetVaccination() throws VaccinationNotFoundException {
         //Given
-        User user = new User(4L, "Anna", "Nowakowska", "Poland", new HashSet<>(), new ArrayList<>());
-        Vaccination vaccination = new Vaccination(4L, "Disease4", LocalDate.of(2023, 4, 1), VacType.UNCOMPLETED, user);
+        NomadUser nomadUser = new NomadUser(4L, "Anna", "Nowakowska", "Poland", "Login","Haslo","USER", new HashSet<>(), new ArrayList<>());
+        Vaccination vaccination = new Vaccination(4L, "Disease4", LocalDate.of(2023, 4, 1), VacType.UNCOMPLETED, nomadUser);
         when(vaccinationRepository.findById(4L)).thenReturn(Optional.of(vaccination));
 
         //When

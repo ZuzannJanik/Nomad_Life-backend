@@ -25,7 +25,7 @@ public class TripMapper {
             tripDto.setDateEnd(trip.getDateEnd());
             tripDto.setDestinationCountry(trip.getDestinationCountry());
             tripDto.setTripStatus(trip.getTripStatus());
-            tripDto.setUserList(trip.getUserList());
+            tripDto.setNomadUserList(trip.getNomadUserList());
         return tripDto;
     }
     public List<TripDto> mapToTripDtoList(final List<Trip> tripList){

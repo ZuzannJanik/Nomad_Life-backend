@@ -1,65 +1,64 @@
 package com.crud.nomad.mapper;
 
-import com.crud.nomad.domain.User;
-import com.crud.nomad.domain.Vaccination;
-import com.crud.nomad.domain.dto.UserDto;
+import com.crud.nomad.domain.NomadUser;
+import com.crud.nomad.domain.dto.NomadUserDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class UserMapperTest {
-    private  UserMapper userMapper;
+public class NomadNomadUserMapperTest {
+    private NomadUserMapper nomadUserMapper;
 
     @BeforeEach
     void setUp() {
-        userMapper = new UserMapper();
+        nomadUserMapper = new NomadUserMapper();
     }
 
     @Test
     void testMapToUserDto() {
         //Given
-        User user = new User(1L, "1Name", "2Name", "Poland", "Login","Haslo","USER", new HashSet<>(),new ArrayList<>());
+        NomadUser nomadUser = new NomadUser(1L, "1Name", "2Name", "Poland", "Login","Haslo","USER", new HashSet<>(),new ArrayList<>());
 
         //When
-        UserDto userDto = userMapper.mapToUserDto(user);
+        NomadUserDto userDto = nomadUserMapper.mapToUserDto(nomadUser);
 
         //Then
-        assertEquals(user.getUserId(), userDto.getUserId());
-        assertEquals(user.getFirstName(), userDto.getFirstName());
-        assertEquals(user.getSurname(), userDto.getSurname());
-        assertEquals(user.getHomeland(), userDto.getHomeland());
+        assertEquals(nomadUser.getUserId(), userDto.getUserId());
+        assertEquals(nomadUser.getFirstName(), userDto.getFirstName());
+        assertEquals(nomadUser.getSurname(), userDto.getSurname());
+        assertEquals(nomadUser.getHomeland(), userDto.getHomeland());
     }
 
     @Test
     void testMapToUser() {
         //Given
-        UserDto userDto = new UserDto(1L, "1Name", "2Name", "Poland", "Login","Haslo","USER", new HashSet<>(), new ArrayList<>());
+        NomadUserDto userDto = new NomadUserDto(1L, "1Name", "2Name", "Poland", "Login","Haslo","USER", new HashSet<>(), new ArrayList<>());
 
         //When
-        User user = userMapper.mapToUser(userDto);
+        NomadUser nomadUser = nomadUserMapper.mapToUser(userDto);
 
         //Then
-        assertEquals(userDto.getUserId(), user.getUserId());
-        assertEquals(userDto.getFirstName(), user.getFirstName());
-        assertEquals(userDto.getSurname(), user.getSurname());
-        assertEquals(userDto.getHomeland(), user.getHomeland());
+        assertEquals(userDto.getUserId(), nomadUser.getUserId());
+        assertEquals(userDto.getFirstName(), nomadUser.getFirstName());
+        assertEquals(userDto.getSurname(), nomadUser.getSurname());
+        assertEquals(userDto.getHomeland(), nomadUser.getHomeland());
     }
 
     @Test
     void testMapToUserDtoList() {
       //Given
-        User user1 = new User(1L, "1Name", "2Name", "Poland", "Login","Haslo","USER", new HashSet<>(), new ArrayList<>());
-        User user2 = new User(2L, "3Name", "4Name", "Hong Kong", "Login","Haslo","USER", new HashSet<>(), new ArrayList<>());
-        List<User> userList = new ArrayList<>();
-        userList.add(user1);
-        userList.add(user2);
+        NomadUser nomadUser1 = new NomadUser(1L, "1Name", "2Name", "Poland", "Login","Haslo","USER", new HashSet<>(), new ArrayList<>());
+        NomadUser nomadUser2 = new NomadUser(2L, "3Name", "4Name", "Hong Kong", "Login","Haslo","USER", new HashSet<>(), new ArrayList<>());
+        List<NomadUser> nomadUserList = new ArrayList<>();
+        nomadUserList.add(nomadUser1);
+        nomadUserList.add(nomadUser2);
 
         //When
-        List<UserDto> userDtoList = userMapper.mapToUserDtoList(userList);
+        List<NomadUserDto> userDtoList = nomadUserMapper.mapToUserDtoList(nomadUserList);
 
         //Then
-        assertEquals(userList.size(), userDtoList.size());
+        assertEquals(nomadUserList.size(), userDtoList.size());
     }
 }

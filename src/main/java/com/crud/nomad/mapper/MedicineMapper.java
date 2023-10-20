@@ -11,9 +11,6 @@ import java.util.*;
 public class MedicineMapper {
 
     public Medicine mapToMedicine(final MedicineDto medicineDto) {
-        if (medicineDto == null) {
-            return null;
-        }
         Medicine medicine = new Medicine();
         medicine.setMedicineId(medicineDto.getMedicineId());
         medicine.setMedicineName(medicineDto.getMedicineName());
@@ -24,9 +21,6 @@ public class MedicineMapper {
     }
 
     public MedicineDto mapToMedicineDto(final Medicine medicine) {
-        if (medicine == null) {
-            return null;
-        }
         MedicineDto medicineDto = new MedicineDto();
         medicineDto.setMedicineId(medicine.getMedicineId());
         medicineDto.setMedicineName(medicine.getMedicineName());
@@ -37,9 +31,6 @@ public class MedicineMapper {
     }
 
     public List<MedicineDto> mapToMedicineDtoList(final List<Medicine> medicineList) {
-        if (medicineList == null) {
-            return null;
-        }
         List<MedicineDto> medicineDtoList = new ArrayList<>();
         for (Medicine medicine : medicineList) {
             medicineDtoList.add(mapToMedicineDto(medicine));

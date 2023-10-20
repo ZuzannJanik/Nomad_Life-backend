@@ -10,7 +10,7 @@ import java.util.*;
 @Getter
 @Setter
 @Builder
-public class UserDto {
+public class NomadUserDto {
     private Long userId;
     private String firstName;
     private String surname;

@@ -1,23 +1,23 @@
 package com.crud.nomad.respository;
 
-import com.crud.nomad.domain.User;
+import com.crud.nomad.domain.NomadUser;
 import org.springframework.stereotype.Repository;
 import org.springframework.data.repository.CrudRepository;
 import java.util.*;
 
 @Repository
-public interface UserRepository extends CrudRepository<User, Long> {
+public interface NomadUserRepository extends CrudRepository<NomadUser, Long> {
 
     @Override
-    List<User> findAll();
+    List<NomadUser> findAll();
 
     @Override
-    User save(User user);
+    NomadUser save(NomadUser nomadUser);
 
     @Override
-    Optional<User> findById(Long userId);
+    Optional<NomadUser> findById(Long userId);
 
     @Override
     void deleteById(Long userId);
-    Optional<User> findUserByLogin(String login);
+    Optional<NomadUser> findUserByLogin(String login);
 }

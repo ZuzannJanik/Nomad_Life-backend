@@ -1,9 +1,9 @@
 package com.crud.nomad.controller;
 
-import com.crud.nomad.domain.User;
-import com.crud.nomad.domain.dto.UserDto;
-import com.crud.nomad.mapper.UserMapper;
-import com.crud.nomad.service.UserService;
+import com.crud.nomad.domain.NomadUser;
+import com.crud.nomad.domain.dto.NomadUserDto;
+import com.crud.nomad.mapper.NomadUserMapper;
+import com.crud.nomad.service.NomadUserService;
 import com.google.gson.GsonBuilder;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
@@ -13,7 +13,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.http.MediaType;
-import org.springframework.security.test.context.support.WithMockUser;
+//import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit.jupiter.web.SpringJUnitWebConfig;
 import com.google.gson.Gson;
 import org.springframework.test.web.servlet.MockMvc;
@@ -26,21 +26,21 @@ import java.util.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 @SpringJUnitWebConfig
-@WebMvcTest(UserController.class)
-@AutoConfigureMockMvc(addFilters=false)
-class UserControllerTest {
+@WebMvcTest(NomadUserController.class)
+//@AutoConfigureMockMvc(addFilters=false)
+class NomadNomadUserControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
     @MockBean
-    private UserService dbService;
+    private NomadUserService dbService;
     @SpyBean
-    private UserMapper userMapper;
+    private NomadUserMapper nomadUserMapper;
 
     @Test
     void shouldFetchAllUsers() throws Exception {
         //Given
-        when(dbService.getAllUsers()).thenReturn(List.of(new User(1L, "1Name", "2Name", "Poland", "Login", "Haslo", "USER", new HashSet<>(), new ArrayList<>())));
+        when(dbService.getAllNomadUsers()).thenReturn(List.of(new NomadUser(1L, "1Name", "2Name", "Poland", "Login", "Haslo", "USER", new HashSet<>(), new ArrayList<>())));
 
         //When&Then
         mockMvc
@@ -54,8 +54,8 @@ class UserControllerTest {
     @Test
     void shouldFetchUserById() throws Exception {
         //Given
-        User user = new User(1L, "1Name", "2Name", "Poland", "Login","Haslo", "USER", new HashSet<>(), new ArrayList<>());
-        when(dbService.getUser(1L)).thenReturn(user);
+        NomadUser nomadUser = new NomadUser(1L, "1Name", "2Name", "Poland", "Login","Haslo", "USER", new HashSet<>(), new ArrayList<>());
+        when(dbService.getNomadUser(1L)).thenReturn(nomadUser);
 
         //When&Then
         mockMvc
@@ -74,13 +74,13 @@ class UserControllerTest {
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().is(200));
     }
-    @WithMockUser(username = "user", roles = {"USER"})
+
     @Test
     void shouldUpdateUser() throws Exception {
         //Given
-        User user = new User(1L, "1Name", "2Name", "Poland", "Login","Haslo", "USER", new HashSet<>(), new ArrayList<>());
-        UserDto userDto = new UserDto(1L,"1Name", "2Name", "Poland", "Login", "Haslo","USER", new HashSet<>(), new ArrayList<>());
-        when(dbService.saveUser(any(User.class))).thenReturn(user);
+        NomadUser nomadUser = new NomadUser(1L, "1Name", "2Name", "Poland", "Login","Haslo", "USER", new HashSet<>(), new ArrayList<>());
+        NomadUserDto userDto = new NomadUserDto(1L,"1Name", "2Name", "Poland", "Login", "Haslo","USER", new HashSet<>(), new ArrayList<>());
+        when(dbService.saveNomadUser(any(NomadUser.class))).thenReturn(nomadUser);
 
         Gson gson = new GsonBuilder()
                 .registerTypeAdapter(LocalDate.class, new LocalDateTypeAdapter())
@@ -90,7 +90,7 @@ class UserControllerTest {
         //When&Then
         mockMvc
                 .perform(MockMvcRequestBuilders
-                        .post("/api/v1/users/1")
+                        .post("/api/v1/users")
                         .contentType(MediaType.APPLICATION_JSON)
                         .characterEncoding("UTF-8")
                         .content(jsonContent))
@@ -106,11 +106,11 @@ class UserControllerTest {
     @Test
     void shouldCreateUser() throws Exception {
         //Given
-        User user = new User(1L, "1Name", "2Name", "Poland", "Login","Haslo","USER", new HashSet<>(), new ArrayList<>());
+        NomadUser nomadUser = new NomadUser(1L, "1Name", "2Name", "Poland", "Login","Haslo","USER", new HashSet<>(), new ArrayList<>());
         Gson gson = new GsonBuilder()
                 .registerTypeAdapter(LocalDate.class, new LocalDateTypeAdapter())
                 .create();
-        String jsonContent = gson.toJson(user);
+        String jsonContent = gson.toJson(nomadUser);
 
         //When&Then
         mockMvc

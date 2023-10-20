@@ -1,8 +1,7 @@
 package com.crud.nomad.controller;
 
-import com.crud.nomad.domain.User;
+import com.crud.nomad.domain.NomadUser;
 import com.crud.nomad.domain.Vaccination;
-import com.crud.nomad.domain.dto.UserDto;
 import com.crud.nomad.domain.dto.VaccinationDto;
 import com.crud.nomad.domain.enums.VacType;
 import com.crud.nomad.mapper.VaccinationMapper;
@@ -12,6 +11,7 @@ import com.google.gson.GsonBuilder;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.mock.mockito.SpyBean;
@@ -29,10 +29,10 @@ import static org.mockito.Mockito.when;
 
 @SpringJUnitWebConfig
 @WebMvcTest(VaccinationController.class)
+@AutoConfigureMockMvc(addFilters=false)
 public class VaccinationControllerTest {
     @Autowired
     private MockMvc mockMvc;
-
     @MockBean
     private VaccinationService dbService;
     @SpyBean
@@ -41,7 +41,7 @@ public class VaccinationControllerTest {
     @Test
     void shouldFetchAllVaccinations() throws Exception {
         //Given
-        when(dbService.getAllVaccinations()).thenReturn(List.of(new Vaccination(1L, "Disease",  LocalDate.of(2000, 12, 12), VacType.COMPLETED, new User())));
+        when(dbService.getAllVaccinations()).thenReturn(List.of(new Vaccination(1L, "Disease",  LocalDate.of(2000, 12, 12), VacType.COMPLETED, new NomadUser())));
 
         //When&Then
         mockMvc
@@ -55,7 +55,7 @@ public class VaccinationControllerTest {
     @Test
     void shouldFetchVaccinationById() throws Exception {
         //Given
-        Vaccination vaccination = new Vaccination(1L, "Disease",  LocalDate.of(2000, 12, 12), VacType.COMPLETED, new User());
+        Vaccination vaccination = new Vaccination(1L, "Disease",  LocalDate.of(2000, 12, 12), VacType.COMPLETED, new NomadUser());
         when(dbService.getVaccination(1L)).thenReturn(vaccination);
 
         //When&Then
@@ -69,7 +69,6 @@ public class VaccinationControllerTest {
 
     @Test
     void shouldDeleteVaccination() throws Exception {
-        //Given
         //When & Then
         mockMvc
                 .perform(MockMvcRequestBuilders
