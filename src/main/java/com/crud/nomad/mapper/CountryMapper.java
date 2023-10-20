@@ -14,7 +14,7 @@ public class CountryMapper {
     public Country mapToCountry(final CountryDto countryDto) {
         return new Country(
                 countryDto.getCountryId(),
-                countryDto.getName(),
+                countryDto.getCountryName(),
                 countryDto.getFlagUrl()
         );
     }
@@ -22,7 +22,7 @@ public class CountryMapper {
     public CountryDto mapToCountryDto(final Country country) {
         return new CountryDto(
                 country.getCountryId(),
-                country.getName(),
+                country.getCountryName(),
                 country.getFlagUrl()
         );
     }

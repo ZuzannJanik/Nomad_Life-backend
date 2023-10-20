@@ -18,7 +18,7 @@ public class Country {
     private Long countryId;
 
     @Column(name = "country_name")
-    private String name;
+    private String countryName;
 
     @Column(name = "flag_url")
     private String flagUrl;

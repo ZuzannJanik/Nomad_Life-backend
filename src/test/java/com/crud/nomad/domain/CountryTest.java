@@ -1,6 +1,8 @@
 package com.crud.nomad.domain;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+import com.crud.nomad.respository.CountryRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -8,11 +10,13 @@ import org.junit.jupiter.api.Test;
 class CountryTest {
 
     private Country country;
+    private CountryRepository countryRepository;
 
     @BeforeEach
     void setUp() {
         country = new Country(1L, "Poland", "https://example.com/poland.png");
     }
+
 
     @Test
     void getCountryId() {
@@ -23,7 +27,7 @@ class CountryTest {
     @Test
     void getName() {
         //Then
-        assertEquals("Poland", country.getName());
+        assertEquals("Poland", country.getCountryName());
     }
 
     @Test
@@ -35,10 +39,10 @@ class CountryTest {
     @Test
     void setName() {
         //When
-        country.setName("Germany");
+        country.setCountryName("Germany");
 
         //Then
-        assertEquals("Germany", country.getName());
+        assertEquals("Germany", country.getCountryName());
     }
 
     @Test
