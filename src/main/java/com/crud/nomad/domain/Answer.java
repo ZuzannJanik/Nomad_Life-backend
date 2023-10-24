@@ -1,6 +1,7 @@
 package com.crud.nomad.domain;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 @NoArgsConstructor
@@ -16,6 +17,7 @@ public class Answer {
     @Column(name = "answer_id")
     private Long answerId;
 
+    @NotNull
     @Column(name = "question")
     private String question;
 

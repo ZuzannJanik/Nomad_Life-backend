@@ -1,6 +1,7 @@
 package com.crud.nomad.domain;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import jakarta.persistence.*;
 import java.util.*;
@@ -23,23 +24,21 @@ public class NomadUser {
     private String firstName;
 
     @Column(name = "surname")
-    @JsonProperty("surname")
     private String surname;
 
+    @NotNull
     @Column(name = "homeland")
-    @JsonProperty("homeland")
     private String homeland;
 
+    @NotNull
     @Column(name = "login")
-    @JsonProperty("login")
     private String login;
 
+    @NotNull
     @Column(name="password")
-    @JsonProperty("password")
     private String password;
 
     @Column(name="role")
-    @JsonProperty("role")
     private String role;
 
     @ManyToMany(targetEntity = Trip.class,

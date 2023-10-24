@@ -1,7 +1,9 @@
 package com.crud.nomad.domain;
 
 import com.crud.nomad.domain.enums.MedType;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -19,6 +21,7 @@ public class Medicine {
     @Column(name = "medicine_id")
     private Long medicineId;
 
+    @NotNull
     @Column(name = "medicine_name")
     private String medicineName;
 

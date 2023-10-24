@@ -2,6 +2,7 @@ package com.crud.nomad.domain;
 
 import com.crud.nomad.domain.enums.VacType;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -19,6 +20,7 @@ public class Vaccination {
     @Column(name = "vac_id")
     private Long vacId;
 
+    @NotNull
     @Column(name = "disease")
     private String diseaseName;
 
