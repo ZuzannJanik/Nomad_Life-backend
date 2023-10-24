@@ -12,10 +12,7 @@ import java.util.Set;
 import static org.junit.jupiter.api.Assertions.*;
 
 class TripTest {
-
     private Trip trip;
-    private TripRepository tripRepository;
-
     @BeforeEach
     void setUp() {
         trip = new Trip(1L, LocalDate.of(2023, 10, 10), LocalDate.of(2023, 10, 15), "France", TripStatus.PLANNED);

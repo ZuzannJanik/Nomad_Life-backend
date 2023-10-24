@@ -9,7 +9,6 @@ import java.util.*;
 @Service
 @RequiredArgsConstructor
 public class MedicineMapper {
-
     public Medicine mapToMedicine(final MedicineDto medicineDto) {
         Medicine medicine = new Medicine();
         medicine.setMedicineId(medicineDto.getMedicineId());

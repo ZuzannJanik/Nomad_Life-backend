@@ -14,7 +14,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class MedicineMapperTest {
     private MedicineMapper medicineMapper;
-
     @BeforeEach
     void setUp() {
         medicineMapper = new MedicineMapper();

@@ -11,6 +11,8 @@ public interface CountryRepository extends CrudRepository<Country, Long> {
     List<Country> findAll();
     @Override
     Optional<Country> findById(Long countryId);
-
-
+    @Override
+    Country save(Country country);
+    @Override
+    void deleteById(Long countryId);
 }

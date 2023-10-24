@@ -30,7 +30,7 @@ public class NomadUserController {
     }
 
     @DeleteMapping(value = "{userId}")
-    public ResponseEntity<NomadUserDto> deleteNomadUser(@PathVariable Long userId)  throws NomadUserNotFoundException {
+    public ResponseEntity<NomadUserDto> deleteNomadUser(@PathVariable Long userId) {
         service.deleteNomadUser(userId);
         return ResponseEntity.ok().build();
     }
@@ -44,13 +44,7 @@ public class NomadUserController {
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> createUser(@RequestBody NomadUserDto userDto) {
-        NomadUser nomadUser = nomadUserMapper.mapToUser(userDto);
-        NomadUser savedNomadUser = service.saveNomadUser(nomadUser);
+        service.saveNomadUser(nomadUserMapper.mapToUser(userDto));
         return ResponseEntity.ok().build();
-    }
-
-    @GetMapping(value = "/check/{login}")
-    public ResponseEntity<Boolean> checkIfUserExists(@PathVariable String login){
-        return ResponseEntity.ok(service.getNomadUserByLogin(login).isPresent());
     }
 }

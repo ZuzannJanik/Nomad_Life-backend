@@ -15,10 +15,8 @@ import static org.mockito.Mockito.*;
 
 @SpringBootTest
 public class NomadNomadUserServiceTest {
-
     @Mock
     private NomadUserRepository nomadUserRepository;
-
     @InjectMocks
     private NomadUserService nomadUserService;
 

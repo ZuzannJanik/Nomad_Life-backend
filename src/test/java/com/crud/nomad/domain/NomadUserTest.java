@@ -14,9 +14,7 @@ import java.util.Set;
 import static org.junit.jupiter.api.Assertions.*;
 
 class NomadUserTest {
-
     private NomadUser nomadUser;
-    private NomadUserRepository nomadUserRepository;
 
     @BeforeEach
     void setUp() {

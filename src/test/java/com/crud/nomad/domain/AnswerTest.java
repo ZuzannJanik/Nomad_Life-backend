@@ -1,56 +1,55 @@
 package com.crud.nomad.domain;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import com.crud.nomad.respository.CountryRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class CountryTest {
-
-    private Country country;
-    private CountryRepository countryRepository;
-
+class AnswerTest {
+    private Answer answer;
     @BeforeEach
     void setUp() {
-        country = new Country(1L, "Poland", "https://example.com/poland.png");
+        answer = new Answer(1L, "Test question", "Test snippet", "Test link");
     }
 
-
     @Test
-    void getCountryId() {
+    void getAnswerId() {
         //Then
-        assertEquals(1L, country.getCountryId());
+        assertEquals(1L, answer.getAnswerId());
     }
 
     @Test
-    void getName() {
+    void getQuestion() {
         //Then
-        assertEquals("Poland", country.getCountryName());
+        assertEquals("Test question", answer.getQuestion());
     }
 
     @Test
-    void getFlagUrl() {
+    void getSnippet() {
         //Then
-        assertEquals("https://example.com/poland.png", country.getFlagUrl());
+        assertEquals("Test snippet", answer.getSnippet());
+    }
+    @Test
+    void getLink() {
+        //Then
+        assertEquals("Test link", answer.getLink());
     }
 
     @Test
-    void setName() {
+    void setQuestion() {
         //When
-        country.setCountryName("Germany");
+        answer.setQuestion("Test");
 
         //Then
-        assertEquals("Germany", country.getCountryName());
+        assertEquals("Test", answer.getQuestion());
     }
 
     @Test
-    void setFlagUrl() {
+    void setSnippet() {
         //When
-        country.setFlagUrl("https://example.com/germany.png");
+        answer.setSnippet("Test");
 
         //Then
-        assertEquals("https://example.com/germany.png", country.getFlagUrl());
+        assertEquals("Test", answer.getSnippet());
     }
 }

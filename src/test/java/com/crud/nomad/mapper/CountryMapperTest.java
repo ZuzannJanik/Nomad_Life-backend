@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CountryMapperTest {
 
-    private CountryMapper countryMapper = new CountryMapper();
+    private final CountryMapper countryMapper = new CountryMapper();
 
     @Test
     void testMapToCountry() {

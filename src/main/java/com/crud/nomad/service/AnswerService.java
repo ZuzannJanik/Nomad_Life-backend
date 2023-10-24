@@ -26,9 +26,9 @@ public class AnswerService {
         this.googleSearchConfiguration = googleSearchConfiguration;
     }
 
-    public Answer getSnippet(String question) throws SearchException {
+    public Answer generateSnippet(String question) throws SearchException {
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(googleSearchConfiguration.getGoogleUrl() + question))
+                .uri(URI.create(googleSearchConfiguration.getGoogleUrl() + question + "&lr=lang_en"))
                 .header("X-RapidAPI-Key", googleSearchConfiguration.getGoogleKey())
                 .header("X-RapidAPI-Host", googleSearchConfiguration.getGoogleHost())
                 .method("GET", HttpRequest.BodyPublishers.noBody())
@@ -36,6 +36,7 @@ public class AnswerService {
 
         String responseBody = "";
         String snippet = "";
+        String link = "";
         try {
             HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
             responseBody = response.body();
@@ -55,15 +56,18 @@ public class AnswerService {
                     if (firstItem.has("snippet")) {
                         snippet = firstItem.get("snippet").getAsString();
                     }
+                    if (firstItem.has("link")) {
+                        link = firstItem.get("link").getAsString();
+                    }
                 } else {
                     throw new SearchException();
                 }
             }
         }
-
         return Answer.builder()
                 .question(question)
                 .snippet(snippet)
+                .link(link)
                 .build();
     }
 }

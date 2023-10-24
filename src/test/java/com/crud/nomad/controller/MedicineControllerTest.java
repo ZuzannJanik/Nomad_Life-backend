@@ -1,4 +1,5 @@
 package com.crud.nomad.controller;
+
 import com.crud.nomad.domain.Medicine;
 import com.crud.nomad.domain.dto.MedicineDto;
 import com.crud.nomad.domain.enums.MedType;
@@ -7,10 +8,8 @@ import com.crud.nomad.service.MedicineService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.hamcrest.Matchers;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.mock.mockito.SpyBean;
@@ -27,7 +26,6 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 @SpringJUnitWebConfig
 @WebMvcTest(MedicineController.class)
-@AutoConfigureMockMvc(addFilters=false)
 public class MedicineControllerTest {
 
     @Autowired
@@ -50,7 +48,6 @@ public class MedicineControllerTest {
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().is(200))
                 .andExpect(MockMvcResultMatchers.jsonPath("$", Matchers.hasSize(1)));
-
     }
 
     @Test
@@ -66,7 +63,6 @@ public class MedicineControllerTest {
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().is(200))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.medicineId", Matchers.is(1)));
-
     }
 
     @Test

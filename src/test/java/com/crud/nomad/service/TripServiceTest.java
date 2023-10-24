@@ -20,10 +20,8 @@ import static org.mockito.Mockito.*;
 
 @SpringBootTest
 public class TripServiceTest {
-
     @Mock
     private TripRepository tripRepository;
-
     @InjectMocks
     private TripService tripService;
 

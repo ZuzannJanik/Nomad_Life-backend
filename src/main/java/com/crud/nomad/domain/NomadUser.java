@@ -22,24 +22,24 @@ public class NomadUser {
     @JsonProperty("firstName")
     private String firstName;
 
-    @JsonProperty("surname")
     @Column(name = "surname")
+    @JsonProperty("surname")
     private String surname;
 
-    @JsonProperty("homeland")
     @Column(name = "homeland")
+    @JsonProperty("homeland")
     private String homeland;
 
-    @JsonProperty("login")
     @Column(name = "login")
+    @JsonProperty("login")
     private String login;
 
-    @JsonProperty("password")
     @Column(name="password")
+    @JsonProperty("password")
     private String password;
 
-    @JsonProperty("role")
     @Column(name="role")
+    @JsonProperty("role")
     private String role;
 
     @ManyToMany(targetEntity = Trip.class,

@@ -10,7 +10,6 @@ import java.time.LocalDate;
 import static org.junit.jupiter.api.Assertions.*;
 
 class VaccinationTest {
-
     private Vaccination vaccination;
     private VaccinationRepository vaccinationRepository;
 

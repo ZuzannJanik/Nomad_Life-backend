@@ -4,13 +4,11 @@ import com.crud.nomad.domain.Country;
 import com.crud.nomad.domain.dto.CountryDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class CountryMapper {
-
     public Country mapToCountry(final CountryDto countryDto) {
         return new Country(
                 countryDto.getCountryId(),

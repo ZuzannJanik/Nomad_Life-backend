@@ -1,7 +1,6 @@
 package com.crud.nomad.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 
 @NoArgsConstructor
@@ -11,5 +10,18 @@ import lombok.*;
 @Builder
 @Table(name = "answers")
 @Entity
-public class answer {
+public class Answer {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "answer_id")
+    private Long answerId;
+
+    @Column(name = "question")
+    private String question;
+
+    @Column(name = "snippet")
+    private String snippet;
+
+    @Column(name = "link")
+    private String link;
 }
