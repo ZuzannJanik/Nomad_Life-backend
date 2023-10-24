@@ -1,6 +1,7 @@
 package com.crud.nomad.domain;
 
 import com.crud.nomad.domain.enums.TripStatus;
+import com.crud.nomad.respository.TripRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -13,6 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class TripTest {
 
     private Trip trip;
+    private TripRepository tripRepository;
 
     @BeforeEach
     void setUp() {
@@ -52,14 +54,14 @@ class TripTest {
     @Test
     void getUserList() {
         //Given
-        Set<User> userList = new HashSet<>();
-        User user = new User(1L, "Jan", "Kowalski", "Poland");
-        userList.add(user);
+        Set<NomadUser> nomadUserList = new HashSet<>();
+        NomadUser nomadUser = new NomadUser(1L, "Jan", "Kowalski", "Poland", "Login", "Password", "USER");
+        nomadUserList.add(nomadUser);
 
         //When
-       trip.setUserList(userList);
+       trip.setNomadUserList(nomadUserList);
 
         //Then
-        assertEquals(userList, trip.getUserList());
+        assertEquals(nomadUserList, trip.getNomadUserList());
     }
 }

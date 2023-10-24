@@ -1,13 +1,11 @@
 package com.crud.nomad.controller;
-import com.crud.nomad.domain.Medicine;
-import com.crud.nomad.domain.dto.MedicineDto;
-import com.crud.nomad.domain.enums.MedType;
-import com.crud.nomad.mapper.MedicineMapper;
-import com.crud.nomad.service.MedicineService;
-import com.google.gson.Gson;
+
+import com.crud.nomad.domain.NomadUser;
+import com.crud.nomad.domain.dto.NomadUserDto;
+import com.crud.nomad.mapper.NomadUserMapper;
+import com.crud.nomad.service.NomadUserService;
 import com.google.gson.GsonBuilder;
 import org.hamcrest.Matchers;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -15,108 +13,109 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.http.MediaType;
+//import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit.jupiter.web.SpringJUnitWebConfig;
+import com.google.gson.Gson;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.time.LocalDate;
-import java.util.List;
+import java.util.*;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 @SpringJUnitWebConfig
-@WebMvcTest(MedicineController.class)
-@AutoConfigureMockMvc(addFilters=false)
-public class MedicineControllerTest {
+@WebMvcTest(NomadUserController.class)
+//@AutoConfigureMockMvc(addFilters=false)
+class NomadNomadUserControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
-
     @MockBean
-    private MedicineService dbService;
+    private NomadUserService dbService;
     @SpyBean
-    private MedicineMapper MedicineMapper;
+    private NomadUserMapper nomadUserMapper;
 
     @Test
-    void shouldFetchAllMedicines() throws Exception {
+    void shouldFetchAllUsers() throws Exception {
         //Given
-        when(dbService.getAllMedicines()).thenReturn(List.of(new Medicine(1L, "Apap", "Headache", MedType.BASIC, LocalDate.of(2025,12,12))));
+        when(dbService.getAllNomadUsers()).thenReturn(List.of(new NomadUser(1L, "1Name", "2Name", "Poland", "Login", "Haslo", "USER", new HashSet<>(), new ArrayList<>())));
 
         //When&Then
         mockMvc
                 .perform(MockMvcRequestBuilders
-                        .get("/api/v1/medicines")
+                        .get("/api/v1/users")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().is(200))
                 .andExpect(MockMvcResultMatchers.jsonPath("$", Matchers.hasSize(1)));
-
     }
 
     @Test
-    void shouldFetchMedicineById() throws Exception {
+    void shouldFetchUserById() throws Exception {
         //Given
-        Medicine medicine = new Medicine(1L, "Apap", "Headache", MedType.BASIC, LocalDate.of(2025,12,12));
-        when(dbService.getMedicine(1L)).thenReturn(medicine);
+        NomadUser nomadUser = new NomadUser(1L, "1Name", "2Name", "Poland", "Login","Haslo", "USER", new HashSet<>(), new ArrayList<>());
+        when(dbService.getNomadUser(1L)).thenReturn(nomadUser);
 
         //When&Then
         mockMvc
                 .perform(MockMvcRequestBuilders
-                        .get("/api/v1/medicines/1")
+                        .get("/api/v1/users/1")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().is(200))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.medicineId", Matchers.is(1)));
-
+                .andExpect(MockMvcResultMatchers.jsonPath("$.userId", Matchers.is(1)));
     }
-
     @Test
-    void shouldDeleteMedicine() throws Exception {
-        //Given
+    void shouldDeleteUser() throws Exception {
         //When & Then
         mockMvc
                 .perform(MockMvcRequestBuilders
-                        .delete("/api/v1/medicines/1")
+                        .delete("/api/v1/users/1")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().is(200));
     }
 
     @Test
-    void shouldUpdateMedicine() throws Exception {
+    void shouldUpdateUser() throws Exception {
         //Given
-        Medicine medicine = new Medicine(1L, "Apap", "Headache", MedType.BASIC, LocalDate.of(2025,12,12));
-        MedicineDto medicineDto = new MedicineDto();
-        when(dbService.saveMedicine(any(Medicine.class))).thenReturn(medicine);
+        NomadUser nomadUser = new NomadUser(1L, "1Name", "2Name", "Poland", "Login","Haslo", "USER", new HashSet<>(), new ArrayList<>());
+        NomadUserDto userDto = new NomadUserDto(1L,"1Name", "2Name", "Poland", "Login", "Haslo","USER", new HashSet<>(), new ArrayList<>());
+        when(dbService.saveNomadUser(any(NomadUser.class))).thenReturn(nomadUser);
 
         Gson gson = new GsonBuilder()
                 .registerTypeAdapter(LocalDate.class, new LocalDateTypeAdapter())
                 .create();
-        String jsonContent = gson.toJson(medicineDto);
+        String jsonContent = gson.toJson(userDto);
 
         //When&Then
         mockMvc
                 .perform(MockMvcRequestBuilders
-                        .post("/api/v1/medicines")
+                        .post("/api/v1/users")
                         .contentType(MediaType.APPLICATION_JSON)
                         .characterEncoding("UTF-8")
                         .content(jsonContent))
-                .andExpect(MockMvcResultMatchers.status().is(200));
+                .andExpect(MockMvcResultMatchers.status().is(200))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.firstName", Matchers.is("1Name")))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.surname", Matchers.is("2Name")))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.homeland", Matchers.is("Poland")))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.login", Matchers.is("Login")))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.password", Matchers.is("Haslo")))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.role", Matchers.is( "USER")));
+
     }
-
     @Test
-    void shouldCreateTrip() throws Exception {
+    void shouldCreateUser() throws Exception {
         //Given
-        MedicineDto medicineDto = new MedicineDto();
-
+        NomadUser nomadUser = new NomadUser(1L, "1Name", "2Name", "Poland", "Login","Haslo","USER", new HashSet<>(), new ArrayList<>());
         Gson gson = new GsonBuilder()
                 .registerTypeAdapter(LocalDate.class, new LocalDateTypeAdapter())
                 .create();
-
-        String jsonContent = gson.toJson(medicineDto);
+        String jsonContent = gson.toJson(nomadUser);
 
         //When&Then
         mockMvc
                 .perform(MockMvcRequestBuilders
-                        .post("/api/v1/medicines")
+                        .post("/api/v1/users")
                         .contentType(MediaType.APPLICATION_JSON)
                         .characterEncoding("UTF-8")
                         .content(jsonContent))

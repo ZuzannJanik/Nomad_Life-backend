@@ -1,6 +1,8 @@
 package com.crud.nomad.domain;
 
 import com.crud.nomad.domain.enums.TripStatus;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -22,16 +24,22 @@ public class Trip {
     private Long tripId;
 
     @Column(name = "date_start")
+    @JsonProperty("data_start")
+    @JsonFormat(pattern="yyyy-MM-dd")
     private LocalDate dateStart;
 
     @Column(name = "date_end")
+    @JsonProperty("data_end")
+    @JsonFormat(pattern="yyyy-MM-dd")
     private LocalDate dateEnd;
 
     @Column(name = "destination_country")
+    @JsonProperty("destination")
     private String destinationCountry;
 
     @Column(name = "trip_status")
     @Enumerated(EnumType.STRING)
+    @JsonProperty("status")
     private TripStatus tripStatus;
 
     @ManyToMany
@@ -43,7 +51,7 @@ public class Trip {
                     @JoinColumn(name = "user_id", referencedColumnName = "user_id", foreignKey = @ForeignKey(name = "fk_user_id"))}
     )
     @Builder.Default
-    private Set<User> userList = new HashSet<>();
+    private Set<NomadUser> nomadUserList = new HashSet<>();
 
     public Trip (Long tripId, LocalDate dateStart, LocalDate dateEnd, String destinationCountry, TripStatus tripStatus) {
         this.tripId = tripId;

@@ -1,6 +1,6 @@
 package com.crud.nomad.domain.dto;
 
-import com.crud.nomad.domain.User;
+import com.crud.nomad.domain.NomadUser;
 import com.crud.nomad.domain.enums.TripStatus;
 import lombok.*;
 import java.time.LocalDate;
@@ -19,5 +19,5 @@ public class TripDto {
     private String destinationCountry;
     private TripStatus tripStatus;
     @Builder.Default
-    private Set<User> userList = new HashSet<>();
+    private Set<NomadUser> nomadUserList = new HashSet<>();
 }

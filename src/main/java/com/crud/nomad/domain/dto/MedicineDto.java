@@ -2,7 +2,6 @@ package com.crud.nomad.domain.dto;
 
 import com.crud.nomad.domain.enums.MedType;
 import lombok.*;
-
 import java.time.LocalDate;
 
 @NoArgsConstructor

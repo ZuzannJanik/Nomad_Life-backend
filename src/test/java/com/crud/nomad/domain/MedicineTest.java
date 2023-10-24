@@ -1,6 +1,10 @@
 package com.crud.nomad.domain;
 
 import com.crud.nomad.domain.enums.MedType;
+import com.crud.nomad.respository.MedicineRepository;
+import com.crud.nomad.service.MedicineService;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -11,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class MedicineTest {
 
     private Medicine medicine;
+    private MedicineRepository medicineRepository;
 
     @BeforeEach
     void setUp() {

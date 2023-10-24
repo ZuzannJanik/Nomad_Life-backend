@@ -8,8 +8,10 @@ import com.crud.nomad.service.TripService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.hamcrest.Matchers;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.mock.mockito.SpyBean;
@@ -26,11 +28,11 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 @SpringJUnitWebConfig
 @WebMvcTest(TripController.class)
+@AutoConfigureMockMvc(addFilters=false)
 public class TripControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
-
     @MockBean
     private TripService dbService;
     @SpyBean
@@ -67,7 +69,6 @@ public class TripControllerTest {
 
     @Test
     void shouldDeleteTrip() throws Exception {
-        //Given
         //When & Then
         mockMvc
                 .perform(MockMvcRequestBuilders

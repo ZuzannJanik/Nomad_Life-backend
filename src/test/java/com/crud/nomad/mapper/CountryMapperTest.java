@@ -23,7 +23,7 @@ class CountryMapperTest {
 
         //Then
         assertEquals(countryDto.getCountryId(), country.getCountryId());
-        assertEquals(countryDto.getName(), country.getName());
+        assertEquals(countryDto.getCountryName(), country.getCountryName());
         assertEquals(countryDto.getFlagUrl(), country.getFlagUrl());
     }
 
@@ -37,7 +37,7 @@ class CountryMapperTest {
 
         //Then
         assertEquals(country.getCountryId(), countryDto.getCountryId());
-        assertEquals(country.getName(), countryDto.getName());
+        assertEquals(country.getCountryName(), countryDto.getCountryName());
         assertEquals(country.getFlagUrl(), countryDto.getFlagUrl());
     }
 
