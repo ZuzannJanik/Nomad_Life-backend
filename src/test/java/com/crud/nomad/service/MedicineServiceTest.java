@@ -17,10 +17,8 @@ import static org.mockito.Mockito.*;
 
 @SpringBootTest
 public class MedicineServiceTest {
-
     @Mock
     private MedicineRepository medicineRepository;
-
     @InjectMocks
     private MedicineService medicineService;
 

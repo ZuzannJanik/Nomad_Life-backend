@@ -18,10 +18,8 @@ import static org.mockito.Mockito.*;
 
 @SpringBootTest
 public class VaccinationServiceTest {
-
     @Mock
     private VaccinationRepository vaccinationRepository;
-
     @InjectMocks
     private VaccinationService vaccinationService;
 

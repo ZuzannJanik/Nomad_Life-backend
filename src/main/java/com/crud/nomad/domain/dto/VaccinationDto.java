@@ -1,6 +1,6 @@
 package com.crud.nomad.domain.dto;
 
-import com.crud.nomad.domain.enums.VacType;;
+import com.crud.nomad.domain.enums.VacType;
 import lombok.*;
 
 import java.time.LocalDate;

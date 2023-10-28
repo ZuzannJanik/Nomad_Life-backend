@@ -10,7 +10,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class NomadNomadUserMapperTest {
     private NomadUserMapper nomadUserMapper;
-
     @BeforeEach
     void setUp() {
         nomadUserMapper = new NomadUserMapper();

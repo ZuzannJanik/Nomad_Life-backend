@@ -32,7 +32,7 @@ public class MedicineController {
     }
 
     @DeleteMapping(value = "{medicineId}")
-    public ResponseEntity<MedicineDto> deleteMedicine(@PathVariable Long medicineId)  throws MedicineNotFoundException {
+    public ResponseEntity<MedicineDto> deleteMedicine(@PathVariable Long medicineId) {
         service.deleteMedicine(medicineId);
         return ResponseEntity.ok().build();
     }

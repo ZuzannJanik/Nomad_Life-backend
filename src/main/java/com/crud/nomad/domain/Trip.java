@@ -4,6 +4,7 @@ import com.crud.nomad.domain.enums.TripStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -23,23 +24,22 @@ public class Trip {
     @Column(name = "trip_id")
     private Long tripId;
 
+    @NotNull
     @Column(name = "date_start")
-    @JsonProperty("data_start")
     @JsonFormat(pattern="yyyy-MM-dd")
     private LocalDate dateStart;
 
+    @NotNull
     @Column(name = "date_end")
-    @JsonProperty("data_end")
     @JsonFormat(pattern="yyyy-MM-dd")
     private LocalDate dateEnd;
 
+    @NotNull
     @Column(name = "destination_country")
-    @JsonProperty("destination")
     private String destinationCountry;
 
     @Column(name = "trip_status")
     @Enumerated(EnumType.STRING)
-    @JsonProperty("status")
     private TripStatus tripStatus;
 
     @ManyToMany

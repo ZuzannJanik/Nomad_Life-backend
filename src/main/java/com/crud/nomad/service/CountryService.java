@@ -12,16 +12,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import java.io.IOException;
 import java.net.URI;
-import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
 import java.util.List;
 
 @Service
 @Slf4j
-public class CountryService {
+public class CountryService implements HTTPResponse{
     private final CountryRepository repository;
     private final CountryConfiguration countryConfiguration;
     @Autowired
@@ -30,40 +27,35 @@ public class CountryService {
         this.countryConfiguration = countryConfiguration;
     }
     public Country getCountryFlagURL(String countryName) throws CountryNotFoundException {
-            HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create(countryConfiguration.getCountryUrl() + countryName))
-                    .header("X-RapidAPI-Key", countryConfiguration.getCountryKey())
-                    .header("X-RapidAPI-Host", countryConfiguration.getCountryHost())
-                    .method("GET", HttpRequest.BodyPublishers.noBody())
-                    .build();
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(countryConfiguration.getCountryUrl() + countryName))
+                .header("X-RapidAPI-Key", countryConfiguration.getCountryKey())
+                .header("X-RapidAPI-Host", countryConfiguration.getCountryHost())
+                .method("GET", HttpRequest.BodyPublishers.noBody())
+                .build();
 
-            String responseBody = "";
-            String flagUrl = "";
-            try {
-                HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
-                responseBody = response.body();
-            } catch (InterruptedException | IOException e) {
-                log.info(e.getMessage());
-            }
-            JsonElement jsonElement = JsonParser.parseString(responseBody);
-            if (jsonElement.isJsonArray()) {
-                JsonArray jsonArray = jsonElement.getAsJsonArray();
+        String responseBody = getResponseBody(request);
+        String flagUrl = "";
 
-                if (jsonArray.size() > 0) {
-                    JsonObject jsonObject = jsonArray.get(0).getAsJsonObject();
+        JsonElement jsonElement = JsonParser.parseString(responseBody);
+        if (jsonElement.isJsonArray()) {
+            JsonArray jsonArray = jsonElement.getAsJsonArray();
 
-                    if (jsonObject.has("flag")) {
-                        flagUrl = jsonObject.getAsJsonObject("flag").getAsJsonObject("officialflag").get("svg").getAsString();
-                    }
-                } else {
-                    throw new CountryNotFoundException();
+            if (jsonArray.size() > 0) {
+                JsonObject jsonObject = jsonArray.get(0).getAsJsonObject();
+
+                if (jsonObject.has("flag")) {
+                    flagUrl = jsonObject.getAsJsonObject("flag").getAsJsonObject("officialflag").get("svg").getAsString();
                 }
+            } else {
+                throw new CountryNotFoundException();
             }
-            return Country.builder()
-                    .countryName(countryName)
-                    .flagUrl(flagUrl)
-                    .build();
         }
+        return Country.builder()
+                .countryName(countryName)
+                .flagUrl(flagUrl)
+                .build();
+    }
 
       RestTemplate restTemplate = new RestTemplate();
     public List<Country> getAllCountries() {

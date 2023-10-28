@@ -15,7 +15,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class TripMapperTest {
     private TripMapper tripMapper;
-
     @BeforeEach
     void setUp() {
         tripMapper = new TripMapper();

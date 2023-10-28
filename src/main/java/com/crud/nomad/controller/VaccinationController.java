@@ -32,7 +32,7 @@ public class VaccinationController {
     }
 
     @DeleteMapping(value = "{vacId}")
-    public ResponseEntity<VaccinationDto> deleteVaccination(@PathVariable Long vacId)  throws  VaccinationNotFoundException {
+    public ResponseEntity<VaccinationDto> deleteVaccination(@PathVariable Long vacId) {
         vaccinationService.deleteVaccination(vacId);
         return ResponseEntity.ok().build();
     }

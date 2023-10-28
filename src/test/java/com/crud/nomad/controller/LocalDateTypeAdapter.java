@@ -1,7 +1,6 @@
 package com.crud.nomad.controller;
 
 import com.google.gson.*;
-
 import java.lang.reflect.Type;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;

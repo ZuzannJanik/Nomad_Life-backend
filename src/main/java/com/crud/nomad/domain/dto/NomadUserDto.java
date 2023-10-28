@@ -2,6 +2,7 @@ package com.crud.nomad.domain.dto;
 
 import com.crud.nomad.domain.Trip;
 import com.crud.nomad.domain.Vaccination;
+import com.crud.nomad.domain.enums.UserRole;
 import lombok.*;
 import java.util.*;
 
@@ -17,7 +18,7 @@ public class NomadUserDto {
     private String homeland;
     private String login;
     private String password;
-    private String role;
+    private UserRole role;
     private Set<Trip> tripList;
     private List<Vaccination> vaccinationList;
 }

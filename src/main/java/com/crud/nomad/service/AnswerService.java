@@ -10,15 +10,12 @@ import com.google.gson.JsonParser;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.io.IOException;
 import java.net.URI;
-import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
+
 @Service
 @Slf4j
-public class AnswerService {
+public class AnswerService implements HTTPResponse{
     private final GoogleSearchConfiguration googleSearchConfiguration;
 
     @Autowired
@@ -26,25 +23,22 @@ public class AnswerService {
         this.googleSearchConfiguration = googleSearchConfiguration;
     }
 
-    public Answer getSnippet(String question) throws SearchException {
+    public Answer generateSnippet(String question) throws SearchException {
+        String snippet = "";
+        String link = "";
+
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(googleSearchConfiguration.getGoogleUrl() + question))
+                .uri(URI.create(googleSearchConfiguration.getGoogleUrl() + question + "&lr=lang_en"))
                 .header("X-RapidAPI-Key", googleSearchConfiguration.getGoogleKey())
                 .header("X-RapidAPI-Host", googleSearchConfiguration.getGoogleHost())
                 .method("GET", HttpRequest.BodyPublishers.noBody())
                 .build();
 
-        String responseBody = "";
-        String snippet = "";
-        try {
-            HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
-            responseBody = response.body();
-        } catch (InterruptedException | IOException e) {
-            log.info(e.getMessage());
-        }
-        JsonElement jsonElement = JsonParser.parseString(responseBody);
-        if (jsonElement.isJsonObject()) {
-            JsonObject jsonObject = jsonElement.getAsJsonObject();
+        String responseBody = getResponseBody(request);
+
+        JsonElement jsonElem = JsonParser.parseString(responseBody);
+        if (jsonElem.isJsonObject()) {
+            JsonObject jsonObject = jsonElem.getAsJsonObject();
 
             if (jsonObject.has("items")) {
                 JsonArray jsonArray = jsonObject.getAsJsonArray("items");
@@ -55,15 +49,18 @@ public class AnswerService {
                     if (firstItem.has("snippet")) {
                         snippet = firstItem.get("snippet").getAsString();
                     }
+                    if (firstItem.has("link")) {
+                        link = firstItem.get("link").getAsString();
+                    }
                 } else {
                     throw new SearchException();
                 }
             }
         }
-
         return Answer.builder()
                 .question(question)
                 .snippet(snippet)
+                .link(link)
                 .build();
     }
 }

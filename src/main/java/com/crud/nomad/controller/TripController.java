@@ -31,7 +31,7 @@ public class TripController {
     }
 
     @DeleteMapping(value = "{tripId}")
-    public ResponseEntity<TripDto> deleteTrip(@PathVariable Long tripId)  throws  TripNotFoundException {
+    public ResponseEntity<TripDto> deleteTrip(@PathVariable Long tripId) {
         tripService.deleteTrip(tripId);
         return ResponseEntity.ok().build();
     }

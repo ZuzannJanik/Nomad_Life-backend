@@ -9,7 +9,6 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class VaccinationMapper {
-
     public Vaccination mapToVaccination(final VaccinationDto vaccinationDto) {
         return Vaccination.builder()
                 .vacId(vaccinationDto.getVacId())
