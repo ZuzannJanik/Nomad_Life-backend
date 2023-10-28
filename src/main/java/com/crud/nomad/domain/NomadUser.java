@@ -1,6 +1,6 @@
 package com.crud.nomad.domain;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.crud.nomad.domain.enums.UserRole;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import jakarta.persistence.*;
@@ -20,7 +20,6 @@ public class NomadUser {
     private Long userId;
 
     @Column(name = "firstname")
-    @JsonProperty("firstName")
     private String firstName;
 
     @Column(name = "surname")
@@ -39,7 +38,7 @@ public class NomadUser {
     private String password;
 
     @Column(name="role")
-    private String role;
+    private UserRole role;
 
     @ManyToMany(targetEntity = Trip.class,
             mappedBy = "nomadUserList",
@@ -52,7 +51,14 @@ public class NomadUser {
     @Builder.Default
     private List<Vaccination> vaccinationList = new ArrayList<>();
 
-    public NomadUser(Long userId, String firstName, String surname, String homeland, String login, String password, String role) {
+    @ManyToMany(targetEntity = Medicine.class,
+            mappedBy = "userList",
+            cascade = {CascadeType.DETACH,CascadeType.MERGE, CascadeType.PERSIST,CascadeType.REFRESH},
+            fetch = FetchType.LAZY)
+    @Builder.Default
+    private Set<Medicine> medicineList = new HashSet<>();
+
+    public NomadUser(Long userId, String firstName, String surname, String homeland, String login, String password, UserRole role) {
         this.userId = userId;
         this.firstName = firstName;
         this.surname = surname;

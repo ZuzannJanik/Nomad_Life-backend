@@ -1,12 +1,13 @@
 package com.crud.nomad.domain;
 
 import com.crud.nomad.domain.enums.MedType;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -33,4 +34,15 @@ public class Medicine {
 
     @Column(name = "expiry_date")
     private LocalDate expiryDate;
+
+    @ManyToMany
+    @JoinTable(
+            name = "join_medicine_user",
+            joinColumns = {
+                    @JoinColumn(name = "medicine_id", referencedColumnName = "medicine_id")},
+            inverseJoinColumns = {
+                    @JoinColumn(name = "user_id", referencedColumnName = "user_id")}
+    )
+    @Builder.Default
+    private Set<NomadUser> userList = new HashSet<>();
 }
