@@ -3,6 +3,7 @@ package com.crud.nomad.controller;
 
 import com.crud.nomad.domain.NomadUser;
 import com.crud.nomad.domain.dto.NomadUserDto;
+import com.crud.nomad.domain.enums.UserRole;
 import com.crud.nomad.mapper.NomadUserMapper;
 import com.crud.nomad.service.NomadUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +40,7 @@ class NomadNomadUserControllerTest {
     @Test
     void shouldFetchAllUsers() throws Exception {
         //Given
-        when(dbService.getAllNomadUsers()).thenReturn(List.of(new NomadUser(1L, "1Name", "2Name", "Poland", "Login", "Haslo", "USER", new HashSet<>(), new ArrayList<>())));
+        when(dbService.getAllNomadUsers()).thenReturn(List.of(new NomadUser(1L, "1Name", "2Name", "Poland", "Login", "Haslo", UserRole.USER, new HashSet<>(), new ArrayList<>(), new HashSet<>())));
 
         //When&Then
         mockMvc
@@ -53,7 +54,7 @@ class NomadNomadUserControllerTest {
     @Test
     void shouldFetchUserById() throws Exception {
         //Given
-        NomadUser nomadUser = new NomadUser(1L, "1Name", "2Name", "Poland", "Login","Haslo", "USER", new HashSet<>(), new ArrayList<>());
+        NomadUser nomadUser = new NomadUser(1L, "1Name", "2Name", "Poland", "Login","Haslo", UserRole.USER, new HashSet<>(), new ArrayList<>(), new HashSet<>());
         when(dbService.getNomadUser(1L)).thenReturn(nomadUser);
 
         //When&Then
@@ -77,7 +78,7 @@ class NomadNomadUserControllerTest {
     @Test
     void shouldUpdateUser() throws Exception {
         //Given
-        NomadUser nomadUser = new NomadUser(1L, "1Name", "2Name", "Poland", "Login","Haslo", "USER", new HashSet<>(), new ArrayList<>());
+        NomadUser nomadUser = new NomadUser(1L, "1Name", "2Name", "Poland", "Login","Haslo", UserRole.USER, new HashSet<>(), new ArrayList<>(), new HashSet<>());
         NomadUserDto userDto = new NomadUserDto();
         when(dbService.saveNomadUser(any(NomadUser.class))).thenReturn(nomadUser);
 
@@ -99,7 +100,7 @@ class NomadNomadUserControllerTest {
     @Test
     void shouldCreateUser() throws Exception {
         //Given
-        NomadUser nomadUser = new NomadUser(1L, "1Name", "2Name", "Poland", "Login","Haslo","USER", new HashSet<>(), new ArrayList<>());
+        NomadUser nomadUser = new NomadUser(1L, "1Name", "2Name", "Poland", "Login","Haslo",UserRole.USER, new HashSet<>(), new ArrayList<>(), new HashSet<>());
         Gson gson = new GsonBuilder()
                 .registerTypeAdapter(LocalDate.class, new LocalDateTypeAdapter())
                 .create();

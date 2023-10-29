@@ -2,6 +2,7 @@ package com.crud.nomad.mapper;
 
 import com.crud.nomad.domain.NomadUser;
 import com.crud.nomad.domain.dto.NomadUserDto;
+import com.crud.nomad.domain.enums.UserRole;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.util.*;
@@ -18,7 +19,7 @@ public class NomadNomadUserMapperTest {
     @Test
     void testMapToUserDto() {
         //Given
-        NomadUser nomadUser = new NomadUser(1L, "1Name", "2Name", "Poland", "Login","Haslo","USER", new HashSet<>(),new ArrayList<>());
+        NomadUser nomadUser = new NomadUser(1L, "1Name", "2Name", "Poland", "Login","Haslo", UserRole.USER, new HashSet<>(),new ArrayList<>(), new HashSet<>());
 
         //When
         NomadUserDto userDto = nomadUserMapper.mapToUserDto(nomadUser);
@@ -33,7 +34,7 @@ public class NomadNomadUserMapperTest {
     @Test
     void testMapToUser() {
         //Given
-        NomadUserDto userDto = new NomadUserDto(1L, "1Name", "2Name", "Poland", "Login","Haslo","USER", new HashSet<>(), new ArrayList<>());
+        NomadUserDto userDto = new NomadUserDto(1L, "1Name", "2Name", "Poland", "Login","Haslo",UserRole.USER, new HashSet<>(), new ArrayList<>());
 
         //When
         NomadUser nomadUser = nomadUserMapper.mapToUser(userDto);
@@ -48,8 +49,8 @@ public class NomadNomadUserMapperTest {
     @Test
     void testMapToUserDtoList() {
       //Given
-        NomadUser nomadUser1 = new NomadUser(1L, "1Name", "2Name", "Poland", "Login","Haslo","USER", new HashSet<>(), new ArrayList<>());
-        NomadUser nomadUser2 = new NomadUser(2L, "3Name", "4Name", "Hong Kong", "Login","Haslo","USER", new HashSet<>(), new ArrayList<>());
+        NomadUser nomadUser1 = new NomadUser(1L, "1Name", "2Name", "Poland", "Login","Haslo",UserRole.USER, new HashSet<>(), new ArrayList<>(), new HashSet<>());
+        NomadUser nomadUser2 = new NomadUser(2L, "3Name", "4Name", "Hong Kong", "Login","Haslo",UserRole.USER, new HashSet<>(), new ArrayList<>(), new HashSet<>());
         List<NomadUser> nomadUserList = new ArrayList<>();
         nomadUserList.add(nomadUser1);
         nomadUserList.add(nomadUser2);

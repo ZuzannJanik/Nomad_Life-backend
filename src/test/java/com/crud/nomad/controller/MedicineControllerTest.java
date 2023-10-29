@@ -20,6 +20,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.List;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -39,7 +40,7 @@ public class MedicineControllerTest {
     @Test
     void shouldFetchAllMedicines() throws Exception {
         //Given
-        when(dbService.getAllMedicines()).thenReturn(List.of(new Medicine(1L, "Apap", "Headache", MedType.BASIC, LocalDate.of(2025,12,12))));
+        when(dbService.getAllMedicines()).thenReturn(List.of(new Medicine(1L, "Apap", "Headache", MedType.BASIC, LocalDate.of(2025,12,12), new HashSet<>())));
 
         //When&Then
         mockMvc
@@ -53,7 +54,7 @@ public class MedicineControllerTest {
     @Test
     void shouldFetchMedicineById() throws Exception {
         //Given
-        Medicine medicine = new Medicine(1L, "Apap", "Headache", MedType.BASIC, LocalDate.of(2025,12,12));
+        Medicine medicine = new Medicine(1L, "Apap", "Headache", MedType.BASIC, LocalDate.of(2025,12,12), new HashSet<>());
         when(dbService.getMedicine(1L)).thenReturn(medicine);
 
         //When&Then
@@ -79,7 +80,7 @@ public class MedicineControllerTest {
     @Test
     void shouldUpdateMedicine() throws Exception {
         //Given
-        Medicine medicine = new Medicine(1L, "Apap", "Headache", MedType.BASIC, LocalDate.of(2025,12,12));
+        Medicine medicine = new Medicine(1L, "Apap", "Headache", MedType.BASIC, LocalDate.of(2025,12,12), new HashSet<>());
         MedicineDto medicineDto = new MedicineDto();
         when(dbService.saveMedicine(any(Medicine.class))).thenReturn(medicine);
 

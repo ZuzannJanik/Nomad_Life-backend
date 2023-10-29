@@ -4,6 +4,7 @@ import com.crud.nomad.domain.enums.MedType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.time.LocalDate;
+import java.util.HashSet;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -11,7 +12,7 @@ class MedicineTest {
     private Medicine medicine;
     @BeforeEach
     void setUp() {
-        medicine = new Medicine(1L, "Aspirin", "Head pain", MedType.BASIC, LocalDate.of(2023, 12, 31));
+        medicine = new Medicine(1L, "Aspirin", "Head pain", MedType.BASIC, LocalDate.of(2023, 12, 31), new HashSet<>());
     }
 
     @Test

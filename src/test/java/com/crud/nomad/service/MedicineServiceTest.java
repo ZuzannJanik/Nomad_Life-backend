@@ -25,8 +25,8 @@ public class MedicineServiceTest {
     @Test
     public void testGetAllMedicines() {
         //Given
-        Medicine medicine1 = new Medicine(1L, "Apap", "Headache", MedType.BASIC, LocalDate.of(2025, 12, 12));
-        Medicine medicine2 = new Medicine(2L, "Ibuprofen", "Anti-inflammatory", MedType.BASIC, LocalDate.of(2025, 11, 11));
+        Medicine medicine1 = new Medicine(1L, "Apap", "Headache", MedType.BASIC, LocalDate.of(2025, 12, 12), new HashSet<>());
+        Medicine medicine2 = new Medicine(2L, "Ibuprofen", "Anti-inflammatory", MedType.BASIC, LocalDate.of(2025, 11, 11), new HashSet<>());
         List<Medicine> medicines = Arrays.asList(medicine1, medicine2);
         when(medicineRepository.findAll()).thenReturn(medicines);
 
@@ -41,7 +41,7 @@ public class MedicineServiceTest {
     @Test
     public void testSaveMedicine() {
         //Given
-        Medicine medicine = new Medicine(3L, "Paracetamol", "Fever reducer", MedType.BASIC, LocalDate.of(2025, 10, 10));
+        Medicine medicine = new Medicine(3L, "Paracetamol", "Fever reducer", MedType.BASIC, LocalDate.of(2025, 10, 10), new HashSet<>());
         when(medicineRepository.save(medicine)).thenReturn(medicine);
 
         //When
@@ -55,7 +55,7 @@ public class MedicineServiceTest {
     @Test
     public void testGetMedicine() throws MedicineNotFoundException {
         //Given
-        Medicine medicine = new Medicine(4L, "Aspirin", "Painkiller", MedType.BASIC, LocalDate.of(2025, 9, 9));
+        Medicine medicine = new Medicine(4L, "Aspirin", "Painkiller", MedType.BASIC, LocalDate.of(2025, 9, 9), new HashSet<>());
         when(medicineRepository.findById(4L)).thenReturn(Optional.of(medicine));
 
         //When

@@ -1,7 +1,6 @@
 package com.crud.nomad.respository;
 
 import com.crud.nomad.domain.Answer;
-import com.crud.nomad.domain.Country;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;

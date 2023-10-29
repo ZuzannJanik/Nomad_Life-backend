@@ -1,6 +1,7 @@
 package com.crud.nomad.service;
 
 import com.crud.nomad.domain.NomadUser;
+import com.crud.nomad.domain.enums.UserRole;
 import com.crud.nomad.exceptions.NomadUserNotFoundException;
 import com.crud.nomad.respository.NomadUserRepository;
 import org.junit.jupiter.api.Test;
@@ -23,8 +24,8 @@ public class NomadNomadUserServiceTest {
     @Test
     public void testGetAllUsers() {
         //Given
-        NomadUser nomadUser1 = new NomadUser(1L, "Adam", "Nowak", "Poland", "Login","Haslo","USER", new HashSet<>(), new ArrayList<>());
-        NomadUser nomadUser2 = new NomadUser(2L, "Ewa", "Kowalska", "Poland", "Login","Haslo","USER", new HashSet<>(), new ArrayList<>());
+        NomadUser nomadUser1 = new NomadUser(1L, "Adam", "Nowak", "Poland", "Login","Haslo", UserRole.USER, new HashSet<>(), new ArrayList<>(), new HashSet<>());
+        NomadUser nomadUser2 = new NomadUser(2L, "Ewa", "Kowalska", "Poland", "Login","Haslo",UserRole.USER, new HashSet<>(), new ArrayList<>(), new HashSet<>());
         List<NomadUser> nomadUsers = Arrays.asList(nomadUser1, nomadUser2);
         when(nomadUserRepository.findAll()).thenReturn(nomadUsers);
 
@@ -39,7 +40,7 @@ public class NomadNomadUserServiceTest {
     @Test
     public void testSaveUser() {
         //Given
-        NomadUser nomadUser = new NomadUser(3L, "Jan", "Zielinski", "Poland", "Login","Haslo","USER", new HashSet<>(), new ArrayList<>());
+        NomadUser nomadUser = new NomadUser(3L, "Jan", "Zielinski", "Poland", "Login","Haslo",UserRole.USER, new HashSet<>(), new ArrayList<>(), new HashSet<>());
         when(nomadUserRepository.save(nomadUser)).thenReturn(nomadUser);
 
         //When
@@ -53,7 +54,7 @@ public class NomadNomadUserServiceTest {
     @Test
     public void testGetUser() throws NomadUserNotFoundException {
         //Given
-        NomadUser nomadUser = new NomadUser(4L, "Anna", "Nowakowska", "Poland", "Login","Haslo","USER", new HashSet<>(), new ArrayList<>());
+        NomadUser nomadUser = new NomadUser(4L, "Anna", "Nowakowska", "Poland", "Login","Haslo",UserRole.USER, new HashSet<>(), new ArrayList<>(), new HashSet<>());
         when(nomadUserRepository.findById(4L)).thenReturn(Optional.of(nomadUser));
 
         //When
