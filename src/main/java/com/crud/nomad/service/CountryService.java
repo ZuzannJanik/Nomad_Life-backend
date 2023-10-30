@@ -11,10 +11,8 @@ import com.google.gson.JsonParser;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 import java.net.URI;
 import java.net.http.HttpRequest;
-import java.util.List;
 
 @Service
 @Slf4j
@@ -55,16 +53,5 @@ public class CountryService implements HTTPResponse{
                 .countryName(countryName)
                 .flagUrl(flagUrl)
                 .build();
-    }
-
-      RestTemplate restTemplate = new RestTemplate();
-    public List<Country> getAllCountries() {
-        return repository.findAll();
-    }
-    public Country getCountry(final Long countryId) throws CountryNotFoundException {
-        return repository.findById(countryId).orElseThrow(CountryNotFoundException::new);
-    }
-    public Country saveCountry(final Country country) {
-        return repository.save(country);
     }
 }
