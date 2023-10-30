@@ -1,6 +1,5 @@
 package com.crud.nomad.respository;
 
-import com.crud.nomad.domain.Trip;
 import com.crud.nomad.domain.Vaccination;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;

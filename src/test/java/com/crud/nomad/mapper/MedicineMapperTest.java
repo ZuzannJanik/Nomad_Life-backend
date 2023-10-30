@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -22,7 +23,7 @@ class MedicineMapperTest {
     @Test
     void testMapToMedicineDto() {
         //Given
-        Medicine medicine = new Medicine(1L, "Apap", "Headache", MedType.BASIC, LocalDate.of(2025,12,12));
+        Medicine medicine = new Medicine(1L, "Apap", "Headache", MedType.BASIC, LocalDate.of(2025,12,12), new HashSet<>());
 
         //When
         MedicineDto medicineDto = medicineMapper.mapToMedicineDto(medicine);
@@ -54,8 +55,8 @@ class MedicineMapperTest {
     @Test
     void testMapToMedicineDtoList() {
         //Given
-        Medicine medicine1 = new Medicine(1L, "Apap", "Headache", MedType.BASIC, LocalDate.of(2025,12,12));
-        Medicine medicine2 = new Medicine(2L, "Apap", "Headache", MedType.BASIC, LocalDate.of(2025,12,12));
+        Medicine medicine1 = new Medicine(1L, "Apap", "Headache", MedType.BASIC, LocalDate.of(2025,12,12), new HashSet<>());
+        Medicine medicine2 = new Medicine(2L, "Apap", "Headache", MedType.BASIC, LocalDate.of(2025,12,12), new HashSet<>());
         List<Medicine> medicineList = new ArrayList<>();
         medicineList.add(medicine1);
         medicineList.add(medicine2);

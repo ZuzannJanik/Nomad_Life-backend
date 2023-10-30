@@ -1,7 +1,7 @@
 package com.crud.nomad.domain;
 
 import com.crud.nomad.domain.enums.TripStatus;
-import com.crud.nomad.respository.TripRepository;
+import com.crud.nomad.domain.enums.UserRole;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -52,7 +52,7 @@ class TripTest {
     void getUserList() {
         //Given
         Set<NomadUser> nomadUserList = new HashSet<>();
-        NomadUser nomadUser = new NomadUser(1L, "Jan", "Kowalski", "Poland", "Login", "Password", "USER");
+        NomadUser nomadUser = new NomadUser(1L, "Jan", "Kowalski", "Poland", "Login", "Password", UserRole.USER);
         nomadUserList.add(nomadUser);
 
         //When

@@ -1,8 +1,8 @@
 package com.crud.nomad.domain;
 
 import com.crud.nomad.domain.enums.TripStatus;
+import com.crud.nomad.domain.enums.UserRole;
 import com.crud.nomad.domain.enums.VacType;
-import com.crud.nomad.respository.NomadUserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.time.LocalDate;
@@ -18,7 +18,7 @@ class NomadUserTest {
 
     @BeforeEach
     void setUp() {
-        nomadUser = new NomadUser(1L, "Jan", "Kowalski", "Poland", "Login", "Password", "USER");
+        nomadUser = new NomadUser(1L, "Jan", "Kowalski", "Poland", "Login", "Password", UserRole.USER);
     }
 
     @Test

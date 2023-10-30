@@ -1,5 +1,6 @@
 package com.crud.nomad.domain;
 
+import com.crud.nomad.domain.enums.UserRole;
 import com.crud.nomad.domain.enums.VacType;
 import com.crud.nomad.respository.VaccinationRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -78,7 +79,7 @@ class VaccinationTest {
     @Test
     void setUser() {
         //Given
-        NomadUser nomadUser = new NomadUser(1L, "Jan", "Kowalski", "Poland", "Login", "Password", "USER");
+        NomadUser nomadUser = new NomadUser(1L, "Jan", "Kowalski", "Poland", "Login", "Password", UserRole.USER);
 
         //When
         vaccination.setNomadUser(nomadUser);
