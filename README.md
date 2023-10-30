@@ -44,4 +44,4 @@ Includes:
 - Moving planner (cascade or agile plan of things to do before moving out, after moving out, e.g. -2 months before departure, -1 week before departure, on the day of departure, 1 day after arrival).
 
 # Known issues:
-- External APIs are not connected in the frontend layer (however, they work in the backend - this can be checked using Postman and controller tests).
+- External API - Rest Country isn't connected in the frontend layer (however, api work in the backend - this can be checked using Postman and controller tests).
